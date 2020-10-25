@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "166709738282",
+    "firebase_url": "https://school-handasat-tochna.firebaseio.com",
+    "project_id": "school-handasat-tochna",
+    "storage_bucket": "school-handasat-tochna.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:166709738282:android:d92827c0ba8786408b7c53",
+        "android_client_info": {
+          "package_name": "com.example.flash_cards"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "166709738282-i69brmpqljjag344k87lqk0nop7oj162.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB4ZpRE7cR-BH_Tp6VXYWCm1UW-l5LNyd8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "166709738282-i69brmpqljjag344k87lqk0nop7oj162.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:166709738282:android:f58bc7034157ef098b7c53",
+        "android_client_info": {
+          "package_name": "com.example.tutorial_youtube"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "166709738282-i69brmpqljjag344k87lqk0nop7oj162.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB4ZpRE7cR-BH_Tp6VXYWCm1UW-l5LNyd8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "166709738282-i69brmpqljjag344k87lqk0nop7oj162.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
