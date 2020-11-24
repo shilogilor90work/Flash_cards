@@ -45,18 +45,18 @@ public class MainActivity extends AppCompatActivity {
                 String full_name_string = full_name.getText().toString();
                 String email_string = email.getText().toString();
                 String password_string = password.getText().toString();
+
                 if(TextUtils.isEmpty(full_name_string)){
                     full_name.setError("Name is Required");
+                    return;
                 }
-
-                /* sdds
-
-                 */
                 if(TextUtils.isEmpty(email_string)){
                     email.setError("Email is Required");
+                    return;
                 }
                 if(TextUtils.isEmpty(password_string)){
                     password.setError("Password is Required");
+                    return;
                 }
                 if(email_string.length() < 6){
                     password.setError("Password must be atleast 6 charecters");
