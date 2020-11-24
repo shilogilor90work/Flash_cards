@@ -48,6 +48,10 @@ public class MainActivity extends AppCompatActivity {
                 if(TextUtils.isEmpty(full_name_string)){
                     full_name.setError("Name is Required");
                 }
+
+                /* sdds
+
+                 */
                 if(TextUtils.isEmpty(email_string)){
                     email.setError("Email is Required");
                 }
