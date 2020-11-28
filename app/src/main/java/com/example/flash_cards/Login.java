@@ -18,14 +18,19 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.lang.reflect.Array;
+import java.time.Instant;
+import java.util.ArrayList;
+
 public class Login extends AppCompatActivity {
 
 
     EditText email, password;
     TextView register;
-    Button login;
+    Button login, buttonSnir;
     FirebaseAuth fbauth;
     ProgressBar progressBar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +44,24 @@ public class Login extends AppCompatActivity {
         login = findViewById(R.id.Login_button2);
         fbauth = FirebaseAuth.getInstance();
         progressBar = findViewById(R.id.progressBar2);
+
+        /* snirrrrrr   *//////////////////////////////////////////////////
+        /*buttonSnir = findViewById(R.id.buttonSnir);
+
+        ArrayList<String> nameProjects = new ArrayList<String>();
+        nameProjects.add("Algebra Linear");
+        nameProjects.add("Infie 2");
+
+
+        buttonSnir.setOnClickListener(new View.OnClickListener() {
+            public void onClick (View v){
+                Intent i = new Intent(Login.this,test.class);
+                startActivity(i);
+            }
+        });
+        //i.putExtra("subject",nameProjects.get(0));
+*/
+        /////////////////////////////////////////////////////////////////
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,6 +93,8 @@ public class Login extends AppCompatActivity {
                         }
                     }
                 });
+                Intent i = new Intent(Login.this,Subjects.class);
+                startActivity(i);
             }
         });
         register.setOnClickListener(new View.OnClickListener(){
