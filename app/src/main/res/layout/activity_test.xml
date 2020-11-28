@@ -14,14 +14,13 @@
         app:layout_constraintStart_toStartOf="parent"
         tools:layout_editor_absoluteY="89dp" />
 
-    <EditText
-        android:id="@+id/id2"
+    <TextView
+        android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Name"
-        tools:layout_editor_absoluteX="78dp"
-        tools:layout_editor_absoluteY="85dp" />
+        android:text="Test page...."
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="92dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

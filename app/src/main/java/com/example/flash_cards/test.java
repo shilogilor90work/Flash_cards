@@ -13,6 +13,8 @@ public class test extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_test);
+        setTitle("Test");
 //        subject = (EditText) findViewById(R.id.id2);
 //        setContentView(R.layout.activity_test);
 //        String value = getIntent().getStringExtra("subject");
