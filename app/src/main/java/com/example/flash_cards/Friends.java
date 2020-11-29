@@ -54,7 +54,7 @@ public class Friends extends AppCompatActivity {
         user = FirebaseAuth.getInstance().getCurrentUser();
         on_btn_click();
 
-        root_database.child(user.getEmail().substring(0, user.getEmail().indexOf("@"))).addListenerForSingleValueEvent(
+        root_database.child(user.getEmail().substring(0, user.getEmail().indexOf("@"))).child("friends").addListenerForSingleValueEvent(
                 new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
@@ -63,7 +63,6 @@ public class Friends extends AppCompatActivity {
                         // Result will be holded Here
                         for (DataSnapshot dsp : dataSnapshot.getChildren()) {
                             friends.add(String.valueOf(dsp.getValue()));
-                            Log.d("freehi", String.valueOf(dsp.getValue()));
                             Userlist.add(String.valueOf(dsp.getValue())); //add result into array list
                         }
                         adapter.notifyDataSetChanged();
@@ -97,7 +96,7 @@ public class Friends extends AppCompatActivity {
                 if (task.getResult().getSignInMethods().size() == 0){
                     Toast.makeText(Friends.this, "That User does not exists", Toast.LENGTH_SHORT).show();
                 }else {
-                    root_database.child(user.getEmail().substring(0 ,user.getEmail().indexOf("@"))).push().setValue(search_words.getText().toString());
+                    root_database.child(user.getEmail().substring(0 ,user.getEmail().indexOf("@"))).child("friends").push().setValue(search_words.getText().toString());
                     friends.add(search_words.getText().toString());
                     adapter.notifyDataSetChanged();
                     Toast.makeText(Friends.this, "added to database", Toast.LENGTH_SHORT).show();
