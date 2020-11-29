@@ -22,7 +22,7 @@ public class Definitions extends AppCompatActivity {
         test.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(Definitions.this,test.class);
+                Intent i = new Intent(Definitions.this,Quiz.class);
                 startActivity(i);
             }
         });
