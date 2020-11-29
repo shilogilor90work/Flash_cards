@@ -13,7 +13,7 @@
         </activity>
         <activity android:name=".Definitions"></activity>
         <activity android:name=".Subjects" />
-        <activity android:name=".test" />
+        <activity android:name=".Quiz" />
         <activity android:name=".Login" />
         <activity android:name=".MainActivity">
             <intent-filter>
