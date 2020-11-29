@@ -17,6 +17,10 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -25,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     TextView login;
     FirebaseAuth fbauth;
     ProgressBar progressBar;
+    DatabaseReference root_database;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
         login = findViewById(R.id.login_button);
         fbauth = FirebaseAuth.getInstance();
         progressBar = findViewById(R.id.progressBar);
+        root_database = FirebaseDatabase.getInstance().getReference().child("users");
 
         register.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -58,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
                     password.setError("Password is Required");
                     return;
                 }
-                if(email_string.length() < 6){
+                if(password_string.length() < 6){
                     password.setError("Password must be atleast 6 charecters");
                 }
                 progressBar.setVisibility(View.VISIBLE);
@@ -67,7 +73,9 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
+                            root_database.push().setValue(email_string.substring(0 ,email_string.indexOf("@")));
                             Toast.makeText(MainActivity.this, "Created",Toast.LENGTH_SHORT).show();
+
                             // go to activity.
 //                            startActivity(new Intent(getApplicationContext(), Home_page.class));
                         } else {
