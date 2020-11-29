@@ -11,6 +11,7 @@ import android.widget.Button;
 public class Subjects extends AppCompatActivity {
 
     Button definitions;
+    Button friends;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +28,16 @@ public class Subjects extends AppCompatActivity {
                 startActivity(i);
             }
         });
+        friends = findViewById(R.id.go_to_friends);
+
+        friends.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(Subjects.this,Friends.class);
+                startActivity(i);
+            }
+        });
+
     }
 
 
