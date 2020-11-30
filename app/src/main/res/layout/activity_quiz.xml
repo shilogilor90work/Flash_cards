@@ -7,23 +7,27 @@
     tools:context=".Quiz">
 
     <ListView
-        android:id="@+id/questions_list"
-        android:layout_width="416dp"
-        android:layout_height="589dp"
-        android:layout_marginTop="280dp"
+        android:id="@+id/answers_list"
+        android:layout_width="315dp"
+        android:layout_height="499dp"
+        android:layout_marginBottom="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintHorizontal_bias="0.513"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/textView3"
-        android:layout_width="91dp"
-        android:layout_height="20dp"
-        android:text="Quiz page...."
-        app:layout_constraintBottom_toTopOf="@+id/questions_list"
+        android:id="@+id/question_id"
+        android:layout_width="311dp"
+        android:layout_height="69dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/answers_list"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
