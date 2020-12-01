@@ -9,11 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Flash_cards">
-        <activity android:name="Friends">
-        </activity>
-        <activity android:name=".Definitions"></activity>
+        <activity android:name="Friends" />
+        <activity android:name=".Definitions" />
         <activity android:name=".Subjects" />
-        <activity android:name=".test" />
+        <activity android:name=".Quiz" />
         <activity android:name=".Login" />
         <activity android:name=".MainActivity">
             <intent-filter>
