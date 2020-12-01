@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -33,7 +32,7 @@ public class Friends extends AppCompatActivity {
     EditText search_words;
     Button btn_search;
     ArrayList<String> friends;
-    ArrayAdapter<String> adapter;
+    MyAdapter adapter;
     FirebaseAuth firebaseAuth;
     DatabaseReference root_database;
     FirebaseUser user;
@@ -43,13 +42,11 @@ public class Friends extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_friends);
-        firebaseAuth = FirebaseAuth.getInstance();
         friends_list = (ListView) findViewById(R.id.friends_list);
+        firebaseAuth = FirebaseAuth.getInstance();
         search_words = (EditText) findViewById(R.id.friends_search);
         btn_search = (Button) findViewById(R.id.friends_btn);
-        friends = new ArrayList<>();
-        adapter = new ArrayAdapter<String>(Friends.this, android.R.layout.simple_list_item_1, friends);
-        friends_list.setAdapter(adapter);
+        friends = new ArrayList<String>();
         root_database = FirebaseDatabase.getInstance().getReference().child("users");
         user = FirebaseAuth.getInstance().getCurrentUser();
         on_btn_click();
@@ -58,14 +55,17 @@ public class Friends extends AppCompatActivity {
                 new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-
-                        Userlist = new ArrayList<String>();
                         // Result will be holded Here
                         for (DataSnapshot dsp : dataSnapshot.getChildren()) {
                             friends.add(String.valueOf(dsp.getValue()));
-                            Userlist.add(String.valueOf(dsp.getValue())); //add result into array list
+                            Log.d("hithere", String.valueOf(dsp.getValue()));
                         }
-                        adapter.notifyDataSetChanged();
+                        Log.d("hithere", "f14");
+
+                        friends_list.setAdapter(adapter);
+                        Log.d("hithere", "f16");
+
+//                        adapter.notifyDataSetChanged();
 
                     }
 
@@ -74,6 +74,9 @@ public class Friends extends AppCompatActivity {
 
                     }
                 });
+        Log.d("hithere", "f1");
+        adapter = new MyAdapter(this, friends);
+
     }
 
     /**
@@ -98,7 +101,11 @@ public class Friends extends AppCompatActivity {
                 }else {
                     root_database.child(user.getEmail().substring(0 ,user.getEmail().indexOf("@"))).child("friends").push().setValue(search_words.getText().toString());
                     friends.add(search_words.getText().toString());
+                    Log.d("hithere", "f2");
+
                     adapter.notifyDataSetChanged();
+                    Log.d("hithere", "f3");
+
                     Toast.makeText(Friends.this, "added to database", Toast.LENGTH_SHORT).show();
                 }
 
