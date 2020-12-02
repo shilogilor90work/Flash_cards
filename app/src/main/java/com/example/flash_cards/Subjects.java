@@ -7,6 +7,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import java.util.ArrayList;
+import java.util.Set;
+import java.util.HashSet;
+import java.io.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import androidx.annotation.NonNull;
@@ -24,7 +27,9 @@ public class Subjects extends AppCompatActivity {
     ListView subject_list;
     ArrayList<String>subjects;
     ArrayAdapter<String> adapter;
+    Set<String> _subjects;
     ArrayList<String> Subjectlist;
+
     EditText search_words;
     Button btn_search;
 
@@ -73,12 +78,51 @@ public class Subjects extends AppCompatActivity {
         btn_search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                subjects.add(search_words.getText().toString());
-                adapter.notifyDataSetChanged();
+               if( !check_for_duplicates(subjects,search_words.getText().toString()))
+               {
+
+                   subjects.add(search_words.getText().toString());
+
+
+                   adapter.notifyDataSetChanged();
+               }
+               else
+               {
+                   Toast.makeText(Subjects.this, "please re check for possible duplicate", Toast.LENGTH_SHORT).show();
+               }
             }
         });
     }
-    ///this is a comment
+
+    /**
+     * used for checking possible duplicates for subjects
+     * set has one instance of each element. we insert from list to set
+     * if size is different meaning it has duplicate
+     * algorithm 1 and Algorithm 1 is considered a duplicate
+     * @param __subjects
+     * @return true in case of non duplicate subjects
+     */
+    public boolean check_for_duplicates(ArrayList<String>__subjects,String str)
+    {
+        Set<String>s= new HashSet<String>();
+        //_subjects.add(str);
+        for(int i=0;i<__subjects.size();i++)
+        {
+         String temp=__subjects.get(i).toLowerCase();
+         s.add(temp);
+        }
+        int temp=s.size();
+        s.add(str.toLowerCase());
+        if(s.size()==temp)
+            return true;//duplicates exist
+        return false;//non duplicate list of subjects
+
+    }
+    {
+
+    }
+
+
 
 
 }
