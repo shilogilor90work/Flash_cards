@@ -53,11 +53,13 @@ public class Quiz extends AppCompatActivity {
         choice1 = (Button)findViewById(R.id.choice1);
         choice2 = (Button)findViewById(R.id.choice2);
         choice3 = (Button)findViewById(R.id.choice3);
-
+///snir
         root_database.child(user.getEmail().substring(0, user.getEmail().indexOf("@"))).child("subjects").child("math").addValueEventListener(new ValueEventListener(){
                @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 answers.clear();
+                once = true;
+                once = false;
                 once = true;
                 for(DataSnapshot snapshot: dataSnapshot.getChildren()){
                     if(once) {
