@@ -58,15 +58,8 @@ public class Friends extends AppCompatActivity {
                         // Result will be holded Here
                         for (DataSnapshot dsp : dataSnapshot.getChildren()) {
                             friends.add(String.valueOf(dsp.getValue()));
-                            Log.d("hithere", String.valueOf(dsp.getValue()));
                         }
-                        Log.d("hithere", "f14");
-
                         friends_list.setAdapter(adapter);
-                        Log.d("hithere", "f16");
-
-//                        adapter.notifyDataSetChanged();
-
                     }
 
                     @Override
@@ -74,7 +67,6 @@ public class Friends extends AppCompatActivity {
 
                     }
                 });
-        Log.d("hithere", "f1");
         adapter = new MyAdapter(this, friends);
 
     }
