@@ -39,10 +39,9 @@ public class Quiz extends AppCompatActivity {
     private int questionIndex = 0;
     private Random rand;
     TextView scoreView;
-    boolean once;
+    TextView questionView;
     String question;
     String correctAnswer;
-    TextView questionView;
     Button choice1;
     Button choice2;
     Button choice3;
@@ -71,7 +70,6 @@ public class Quiz extends AppCompatActivity {
         root_database.child(user.getEmail().substring(0, user.getEmail().indexOf("@"))).child("subjects").child("math").addValueEventListener(new ValueEventListener(){
                @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
                 allQuestionsAndAnswers.clear();
                 int i=0;
                 for(DataSnapshot snapshot: dataSnapshot.getChildren()){
@@ -81,6 +79,11 @@ public class Quiz extends AppCompatActivity {
                     allQuestionsAndAnswers.put(i,QandA);
 
                     i++;
+                }
+                Log.d("unsdfkfjgnodngjsdp","i= "+i);
+
+                if(i<3){
+                    goToNotEnoughDefinitions();
                 }
 
                 List<Map.Entry<Integer, ArrayList<String>>> QaA2 = new ArrayList<Map.Entry<Integer, ArrayList<String>>>(allQuestionsAndAnswers.entrySet());
@@ -200,8 +203,13 @@ public class Quiz extends AppCompatActivity {
 
     private void goToFinish() {
         questionIndex=0;
-        Intent i = new Intent(Quiz.this,FinalScore.class);
+        Intent i = new Intent(getApplicationContext(),FinalScore.class);
+        i.putExtra("int_final_score",score);
+        i.putExtra("int_num_questions",allQuestionsAndAnswers.size());
         startActivity(i);
     }
 
+    private void goToNotEnoughDefinitions(){
+        startActivity(new Intent(getApplicationContext(),NotEnoughDefinitions.class));
+    }
 }

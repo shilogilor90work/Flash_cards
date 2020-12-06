@@ -14,7 +14,10 @@
         <activity android:name=".Subjects" />
         <activity android:name=".Quiz" />
         <activity android:name=".Login" />
+        <activity android:name=".FinalScore"/>
+        <activity android:name=".NotEnoughDefinitions"/>
         <activity android:name=".MainActivity">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
