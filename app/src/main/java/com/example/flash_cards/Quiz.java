@@ -60,7 +60,7 @@ public class Quiz extends AppCompatActivity {
         rand=new Random();
 
         allQuestionsAndAnswers = new HashMap<Integer,ArrayList<String>>();
-        QandA = new ArrayList<>();
+
         questionView = (TextView) findViewById(R.id.question_id);
         scoreView = (TextView) findViewById(R.id.score);
         choice1 = (Button)findViewById(R.id.choice1);
@@ -75,19 +75,15 @@ public class Quiz extends AppCompatActivity {
                 allQuestionsAndAnswers.clear();
                 int i=0;
                 for(DataSnapshot snapshot: dataSnapshot.getChildren()){
-                    QandA.clear();
-                    QandA.add(snapshot.getKey().toString());
+                    QandA = new ArrayList<>();
+                    QandA.add(snapshot.getKey());
                     QandA.add(snapshot.getValue().toString());
                     allQuestionsAndAnswers.put(i,QandA);
-                    i++;
 
+                    i++;
                 }
 
                 List<Map.Entry<Integer, ArrayList<String>>> QaA2 = new ArrayList<Map.Entry<Integer, ArrayList<String>>>(allQuestionsAndAnswers.entrySet());
-                Log.d("11111111111111",QaA2.get(0).getValue().get(0)+" | "+QaA2.get(0).getValue().get(1));
-                Log.d("f2222222222222",QaA2.get(1).getValue().get(0)+" | "+QaA2.get(1).getValue().get(1));
-                Log.d("fu333333333333",QaA2.get(2).getValue().get(0)+" | "+QaA2.get(2).getValue().get(1));
-
                 updateQuestion(questionIndex);
                 questionIndex++;
             }
