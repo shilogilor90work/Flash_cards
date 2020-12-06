@@ -8,9 +8,9 @@
 
     <TextView
         android:id="@+id/auth_text3"
-        android:layout_width="255dp"
-        android:layout_height="58dp"
-        android:text="Your final score is: "
+        android:layout_width="312dp"
+        android:layout_height="145dp"
+        android:text="Not enough definitions \t\t\t\t\t to test yourself"
         android:textColor="@android:color/holo_orange_dark"
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -20,7 +20,7 @@
         app:layout_constraintVertical_bias="0.19" />
 
     <Button
-        android:id="@+id/backToSubjects_id2"
+        android:id="@+id/backToSubjects_id"
         android:layout_width="234dp"
         android:layout_height="56dp"
         android:text="Back to subjects"
@@ -29,15 +29,4 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/auth_text3"
         app:layout_constraintVertical_bias="0.503" />
-
-    <TextView
-        android:id="@+id/final_score_id"
-        android:layout_width="303dp"
-        android:layout_height="105dp"
-        android:text="0"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/backToSubjects_id2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/auth_text3" />
 </androidx.constraintlayout.widget.ConstraintLayout>

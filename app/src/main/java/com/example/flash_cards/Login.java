@@ -27,7 +27,7 @@ public class Login extends AppCompatActivity {
 
     EditText email, password;
     TextView register;
-    Button login, buttonSnir;
+    Button login;
     FirebaseAuth fbauth;
     ProgressBar progressBar;
 
@@ -44,24 +44,6 @@ public class Login extends AppCompatActivity {
         login = findViewById(R.id.Login_button2);
         fbauth = FirebaseAuth.getInstance();
         progressBar = findViewById(R.id.progressBar2);
-
-        /* snirrrrrr   *//////////////////////////////////////////////////
-        /*buttonSnir = findViewById(R.id.buttonSnir);
-
-        ArrayList<String> nameProjects = new ArrayList<String>();
-        nameProjects.add("Algebra Linear");
-        nameProjects.add("Infie 2");
-
-
-        buttonSnir.setOnClickListener(new View.OnClickListener() {
-            public void onClick (View v){
-                Intent i = new Intent(Login.this,test.class);
-                startActivity(i);
-            }
-        });
-        //i.putExtra("subject",nameProjects.get(0));
-*/
-        /////////////////////////////////////////////////////////////////
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
