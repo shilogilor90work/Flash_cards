@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/definitions_text"
+        android:layout_width="138dp"
+        android:layout_height="64dp"
+        android:layout_weight="1"
+        tools:text="Definition" />
+
+    <TextView
+        android:id="@+id/definition_value_text"
+        android:layout_width="138dp"
+        android:layout_height="64dp"
+        android:layout_weight="1"
+        tools:layout_editor_absoluteX="178dp"
+        tools:text="Definition Value" />
+
+    <Button
+        android:id="@+id/definition_delete"
+        android:layout_width="96dp"
+        android:layout_height="54dp"
+        android:layout_weight="1"
+        android:text="Delete"
+        tools:layout_editor_absoluteX="316dp"
+        tools:layout_editor_absoluteY="0dp" />
+</LinearLayout>
