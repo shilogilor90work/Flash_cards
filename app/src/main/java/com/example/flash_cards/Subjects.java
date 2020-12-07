@@ -39,7 +39,7 @@ public class Subjects extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_definitions);
+        setContentView(R.layout.activity_subjects);
         setTitle("Definitions");
         add_btn = (Button) findViewById(R.id.subjects_btn);
         definition_btn = findViewById(R.id.Definitions2);
@@ -55,14 +55,14 @@ public class Subjects extends AppCompatActivity {
         add_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                root_database.child(user.getEmail().substring(0, user.getEmail().indexOf("@"))).child("subjects").child("math").child(subjects_txt.getText().toString());
+                root_database.child(user.getEmail().substring(0, user.getEmail().indexOf("@"))).child("subjects").child(subjects_txt.getText().toString());
                 Toast.makeText(Subjects.this, "added data", Toast.LENGTH_SHORT).show();
                 subjectArrayList.add(subjects_txt.getText().toString());
                 adapter.notifyDataSetChanged();
 
             }
         });
-        root_database.child(user.getEmail().substring(0, user.getEmail().indexOf("@"))).child("subjects").child("math").addListenerForSingleValueEvent(
+        root_database.child(user.getEmail().substring(0, user.getEmail().indexOf("@"))).child("subjects").addListenerForSingleValueEvent(
                 new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
