@@ -38,11 +38,10 @@ public class Subjects extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_subjects);
-        setTitle("Definitions");
+        setTitle("Subjects");
 
         friends_btn = (Button) findViewById(R.id.go_to_friends);
         add_btn = (Button) findViewById(R.id.subjects_btn);
-        definition_btn = findViewById(R.id.Definitions2);
         subjects_txt = (EditText) findViewById(R.id.subjects);
         subject_list = (ListView) findViewById(R.id.subject_list);
         firebaseAuth = FirebaseAuth.getInstance();
@@ -52,7 +51,7 @@ public class Subjects extends AppCompatActivity {
         add_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                root_database.child(user.getEmail().substring(0, user.getEmail().indexOf("@"))).child("subjects").child(subjects_txt.getText().toString());
+                root_database.child(user.getEmail().substring(0, user.getEmail().indexOf("@"))).child("subjects").child(subjects_txt.getText().toString()).setValue("stam");
                 Toast.makeText(Subjects.this, "added data", Toast.LENGTH_SHORT).show();
                 subjectArrayList.add(subjects_txt.getText().toString());
                 adapter.notifyDataSetChanged();
@@ -73,13 +72,6 @@ public class Subjects extends AppCompatActivity {
                 });
         adapter = new SubjectsAdapter(this, subjectArrayList);
 
-        definition_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(Subjects.this,Definitions.class);
-                startActivity(i);
-            }
-        });
         friends_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

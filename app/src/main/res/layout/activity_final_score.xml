@@ -21,7 +21,7 @@
 
     <Button
         android:id="@+id/backToSubjects_id2"
-        android:layout_width="234dp"
+        android:layout_width="255dp"
         android:layout_height="56dp"
         android:text="Back to subjects"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -32,8 +32,8 @@
 
     <TextView
         android:id="@+id/final_score_id"
-        android:layout_width="303dp"
-        android:layout_height="105dp"
+        android:layout_width="255dp"
+        android:layout_height="140dp"
         android:text="0"
         android:textSize="30sp"
         app:layout_constraintBottom_toTopOf="@+id/backToSubjects_id2"
