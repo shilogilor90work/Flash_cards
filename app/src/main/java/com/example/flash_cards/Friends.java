@@ -4,7 +4,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -36,7 +35,6 @@ public class Friends extends AppCompatActivity {
     FirebaseAuth firebaseAuth;
     DatabaseReference root_database;
     FirebaseUser user;
-    ArrayList<String> Userlist;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,16 +59,12 @@ public class Friends extends AppCompatActivity {
                         }
                         friends_list.setAdapter(adapter);
                     }
-
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
-
                     }
                 });
         adapter = new MyAdapter(this, friends);
-
     }
-
     /**
      * method is used for checking valid email id format.
      *
@@ -87,20 +81,14 @@ public class Friends extends AppCompatActivity {
         firebaseAuth.fetchSignInMethodsForEmail(search_words.getText().toString()).addOnCompleteListener(new OnCompleteListener<SignInMethodQueryResult>() {
             @Override
             public void onComplete(@NonNull Task<SignInMethodQueryResult> task) {
-//                Log.d(TAG,""+task.getResult().getSignInMethods().size());
                 if (task.getResult().getSignInMethods().size() == 0){
                     Toast.makeText(Friends.this, "That User does not exists", Toast.LENGTH_SHORT).show();
                 }else {
                     root_database.child(user.getEmail().substring(0 ,user.getEmail().indexOf("@"))).child("friends").push().setValue(search_words.getText().toString());
                     friends.add(search_words.getText().toString());
-                    Log.d("hithere", "f2");
-
                     adapter.notifyDataSetChanged();
-                    Log.d("hithere", "f3");
-
-                    Toast.makeText(Friends.this, "added to database", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Friends.this, "Added to database", Toast.LENGTH_SHORT).show();
                 }
-
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override

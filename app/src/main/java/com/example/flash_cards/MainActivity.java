@@ -2,7 +2,6 @@ package com.example.flash_cards;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -20,10 +19,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.util.HashMap;
-
 public class MainActivity extends AppCompatActivity {
-
     EditText full_name, email, password;
     Button register;
     TextView login;
@@ -44,7 +40,6 @@ public class MainActivity extends AppCompatActivity {
         fbauth = FirebaseAuth.getInstance();
         progressBar = findViewById(R.id.progressBar);
         root_database = FirebaseDatabase.getInstance().getReference().child("users");
-
         register.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -65,19 +60,15 @@ public class MainActivity extends AppCompatActivity {
                     return;
                 }
                 if(password_string.length() < 6){
-                    password.setError("Password must be atleast 6 charecters");
+                    password.setError("Password must be atleast 6 characters");
                 }
                 progressBar.setVisibility(View.VISIBLE);
-
                 fbauth.createUserWithEmailAndPassword(email_string, password_string).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
                             root_database.push().setValue(email_string.substring(0 ,email_string.indexOf("@")));
                             Toast.makeText(MainActivity.this, "Created",Toast.LENGTH_SHORT).show();
-
-                            // go to activity.
-//                            startActivity(new Intent(getApplicationContext(), Home_page.class));
                         } else {
                             Toast.makeText(MainActivity.this, "Error: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                         }

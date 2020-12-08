@@ -5,12 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -27,9 +25,9 @@ public class Subjects extends AppCompatActivity {
 
     Button definition_btn;
     Button add_btn;
+    Button friends_btn;
     EditText subjects_txt;
     ListView subject_list;
-
     FirebaseAuth firebaseAuth;
     DatabaseReference root_database;
     ArrayList<String> subjectArrayList;
@@ -41,17 +39,16 @@ public class Subjects extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_subjects);
         setTitle("Definitions");
+
+        friends_btn = (Button) findViewById(R.id.go_to_friends);
         add_btn = (Button) findViewById(R.id.subjects_btn);
         definition_btn = findViewById(R.id.Definitions2);
-
         subjects_txt = (EditText) findViewById(R.id.subjects);
         subject_list = (ListView) findViewById(R.id.subject_list);
-
         firebaseAuth = FirebaseAuth.getInstance();
         subjectArrayList = new ArrayList<String>();
         root_database = FirebaseDatabase.getInstance().getReference().child("users");
         user = FirebaseAuth.getInstance().getCurrentUser();
-
         add_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -59,7 +56,6 @@ public class Subjects extends AppCompatActivity {
                 Toast.makeText(Subjects.this, "added data", Toast.LENGTH_SHORT).show();
                 subjectArrayList.add(subjects_txt.getText().toString());
                 adapter.notifyDataSetChanged();
-
             }
         });
         root_database.child(user.getEmail().substring(0, user.getEmail().indexOf("@"))).child("subjects").addListenerForSingleValueEvent(
@@ -71,20 +67,23 @@ public class Subjects extends AppCompatActivity {
                         }
                         subject_list.setAdapter(adapter);
                     }
-
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
-
                     }
                 });
         adapter = new SubjectsAdapter(this, subjectArrayList);
-
-
 
         definition_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(Subjects.this,Definitions.class);
+                startActivity(i);
+            }
+        });
+        friends_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(Subjects.this,Friends.class);
                 startActivity(i);
             }
         });

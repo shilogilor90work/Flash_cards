@@ -18,13 +18,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
-import java.lang.reflect.Array;
-import java.time.Instant;
-import java.util.ArrayList;
-
 public class Login extends AppCompatActivity {
-
-
     EditText email, password;
     TextView register;
     Button login;
@@ -36,15 +30,12 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         setTitle("Login");
-
-
         email = findViewById(R.id.email2);
         password = findViewById(R.id.password_user2);
         register = findViewById(R.id.register_link);
         login = findViewById(R.id.Login_button2);
         fbauth = FirebaseAuth.getInstance();
         progressBar = findViewById(R.id.progressBar2);
-
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -62,14 +53,11 @@ public class Login extends AppCompatActivity {
                     password.setError("Password must be atleast 6 charecters");
                 }
                 progressBar.setVisibility(View.VISIBLE);
-
                 fbauth.signInWithEmailAndPassword(email_string, password_string).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             Toast.makeText(Login.this, "success", Toast.LENGTH_SHORT).show();
-                            // go to activity
-//                            startActivity(new Intent(getApplicationContext(), Home_page.class));
                         } else {
                             Toast.makeText(Login.this, "Error: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                         }

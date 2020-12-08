@@ -5,11 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -46,6 +43,7 @@ public class Quiz extends AppCompatActivity {
     Button choice2;
     Button choice3;
     Button quit;
+    String subject;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,17 +55,16 @@ public class Quiz extends AppCompatActivity {
         root_database = FirebaseDatabase.getInstance().getReference().child("users");
         user = FirebaseAuth.getInstance().getCurrentUser();
         rand=new Random();
-
         allQuestionsAndAnswers = new HashMap<Integer,ArrayList<String>>();
-
         questionView = (TextView) findViewById(R.id.question_id);
         scoreView = (TextView) findViewById(R.id.score);
         choice1 = (Button)findViewById(R.id.choice1);
         choice2 = (Button)findViewById(R.id.choice2);
         choice3 = (Button)findViewById(R.id.choice3);
         quit = (Button)findViewById(R.id.quit);
+        subject=getIntent().getStringExtra("subject");
 
-        root_database.child(user.getEmail().substring(0, user.getEmail().indexOf("@"))).child("subjects").child("math").addValueEventListener(new ValueEventListener(){
+        root_database.child(user.getEmail().substring(0, user.getEmail().indexOf("@"))).child("subjects").child(subject).addValueEventListener(new ValueEventListener(){
                @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 allQuestionsAndAnswers.clear();
@@ -77,23 +74,17 @@ public class Quiz extends AppCompatActivity {
                     QandA.add(snapshot.getKey());
                     QandA.add(snapshot.getValue().toString());
                     allQuestionsAndAnswers.put(i,QandA);
-
                     i++;
                 }
-                Log.d("unsdfkfjgnodngjsdp","i= "+i);
-
                 if(i<3){
                     goToNotEnoughDefinitions();
                 }
-
                 List<Map.Entry<Integer, ArrayList<String>>> QaA2 = new ArrayList<Map.Entry<Integer, ArrayList<String>>>(allQuestionsAndAnswers.entrySet());
                 updateQuestion(questionIndex);
                 questionIndex++;
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Log.d("unique","in-onCancelled");
             }
         });
 
@@ -157,7 +148,6 @@ public class Quiz extends AppCompatActivity {
 
     private void shuffleAnswersWithCorrectAnswer(List<Map.Entry<Integer, ArrayList<String>>> QaA, String ca){
         Collections.shuffle(QaA);
-
         choice1.setText(QaA.get(0).getValue().get(1));
         choice2.setText(QaA.get(1).getValue().get(1));
         choice3.setText(QaA.get(2).getValue().get(1));
@@ -199,7 +189,6 @@ public class Quiz extends AppCompatActivity {
     private void updateScore(int s){
         scoreView.setText(""+s);
     }
-
 
     private void goToFinish() {
         questionIndex=0;

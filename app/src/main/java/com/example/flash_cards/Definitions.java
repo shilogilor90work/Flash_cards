@@ -5,12 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -60,7 +58,6 @@ public class Definitions extends AppCompatActivity {
                 Toast.makeText(Definitions.this, "added data", Toast.LENGTH_SHORT).show();
                 definitions.add(definition.getText().toString() + "|split|" + definition_value.getText().toString());
                 adapter.notifyDataSetChanged();
-
             }
         });
         root_database.child(user.getEmail().substring(0, user.getEmail().indexOf("@"))).child("subjects").child("math").addListenerForSingleValueEvent(
@@ -72,15 +69,11 @@ public class Definitions extends AppCompatActivity {
                         }
                         definition_list.setAdapter(adapter);
                     }
-
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
-
                     }
                 });
         adapter = new DefinitionsAdapter(this, definitions);
-
-
 
         test.setOnClickListener(new View.OnClickListener() {
             @Override
