@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -54,18 +55,23 @@ public class Definitions extends AppCompatActivity {
         add_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                root_database.child(user.getEmail().substring(0, user.getEmail().indexOf("@"))).child("subjects").child(subject).child(definition.getText().toString()).setValue(definition_value.getText().toString());
-                Toast.makeText(Definitions.this, "added data", Toast.LENGTH_SHORT).show();
-                definitions.add(definition.getText().toString() + "|split|" + definition_value.getText().toString());
-                adapter.notifyDataSetChanged();
+                if (definition.getText().toString().length() > 0 ) {
+                    root_database.child(user.getEmail().substring(0, user.getEmail().indexOf("@"))).child("subjects").child(subject).child(definition.getText().toString()).setValue(definition_value.getText().toString());
+                    Toast.makeText(Definitions.this, "added data", Toast.LENGTH_SHORT).show();
+                    definitions.add(definition.getText().toString() + "|split|" + definition_value.getText().toString()+ "|*subject*|" + subject);
+                    adapter.notifyDataSetChanged();
+                } else {
+                    Toast.makeText(Definitions.this, "Definition Must Be Not Null", Toast.LENGTH_SHORT).show();
+                }
             }
         });
-        root_database.child(user.getEmail().substring(0, user.getEmail().indexOf("@"))).child("subjects").child("math").addListenerForSingleValueEvent(
+        Log.d("hithere", subject);
+        root_database.child(user.getEmail().substring(0, user.getEmail().indexOf("@"))).child("subjects").child(subject).addListenerForSingleValueEvent(
                 new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         for (DataSnapshot dsp : dataSnapshot.getChildren()) {
-                            definitions.add(dsp.getKey() + "|split|" + dsp.getValue().toString());
+                            definitions.add(dsp.getKey() + "|split|" + dsp.getValue().toString()+ "|*subject*|" + subject);
                         }
                         definition_list.setAdapter(adapter);
                     }
