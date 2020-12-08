@@ -65,7 +65,6 @@ public class Definitions extends AppCompatActivity {
                 }
             }
         });
-        Log.d("hithere", subject);
         root_database.child(user.getEmail().substring(0, user.getEmail().indexOf("@"))).child("subjects").child(subject).addListenerForSingleValueEvent(
                 new ValueEventListener() {
                     @Override

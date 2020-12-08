@@ -35,7 +35,6 @@ public class DefinitionsAdapter extends ArrayAdapter {
         TextView definitions_text = (TextView) convertView.findViewById(R.id.definitions_text);
         TextView definition_value_text = (TextView) convertView.findViewById(R.id.definition_value_text);
         Button definition_delete = (Button) convertView.findViewById(R.id.definition_delete);
-        Log.d("hithere", item);
         String key = item.substring(0,item.indexOf("|split|"));
         String value = item.substring(item.indexOf("|split|") + 7 , item.indexOf("|*subject*|"));
         subject= item.substring(item.indexOf("|*subject*|") + 11);
