@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
@@ -46,19 +45,16 @@ public class MyAdapter extends ArrayAdapter {
                     }
                 });
             }
-
             @Override
             public void onCancelled(DatabaseError databaseError) {}
         };
         fromPath.addListenerForSingleValueEvent(valueEventListener);
     }
 
-
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         root_database = FirebaseDatabase.getInstance().getReference().child("users");
         user = FirebaseAuth.getInstance().getCurrentUser();
-
         String item = (String) getItem(position);
         if (convertView==null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.listview_custom, null);

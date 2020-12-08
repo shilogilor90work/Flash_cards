@@ -5,10 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-
 import androidx.appcompat.app.AppCompatActivity;
-
-import java.net.URISyntaxException;
 
 public class FinalScore extends AppCompatActivity {
     Button backToSubjects;
@@ -24,20 +21,14 @@ public class FinalScore extends AppCompatActivity {
 
         backToSubjects = (Button)findViewById(R.id.backToSubjects_id2);
         finalScore = (TextView) findViewById(R.id.final_score_id);
-
         final_sc = getIntent().getIntExtra("int_final_score",0);
         num_que = getIntent().getIntExtra("int_num_questions",0);
-
         finalScore.setText(final_sc+" from "+num_que +" questions");
-
-
         backToSubjects.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(FinalScore.this,Subjects.class);
                 startActivity(i);
-
             }
         });
     }
