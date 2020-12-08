@@ -11,13 +11,13 @@
         android:id="@+id/definition_value"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="There"
+        android:hint="Put answer here"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.602"
+        app:layout_constraintHorizontal_bias="0.774"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.071"
+        app:layout_constraintVertical_bias="0.067"
         tools:text="Put Here Value" />
 
     <ListView
@@ -41,7 +41,7 @@
         android:id="@+id/definition"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hi"
+        android:hint="Put  question here"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.054"

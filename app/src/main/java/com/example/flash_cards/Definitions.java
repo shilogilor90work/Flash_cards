@@ -35,6 +35,7 @@ public class Definitions extends AppCompatActivity {
     ArrayList<String> definitions;
     FirebaseUser user;
     DefinitionsAdapter adapter;
+    String subject;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,11 +51,12 @@ public class Definitions extends AppCompatActivity {
         definitions = new ArrayList<String>();
         root_database = FirebaseDatabase.getInstance().getReference().child("users");
         user = FirebaseAuth.getInstance().getCurrentUser();
+        subject=getIntent().getStringExtra("subject");
 
         add_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                root_database.child(user.getEmail().substring(0, user.getEmail().indexOf("@"))).child("subjects").child("math").child(definition.getText().toString()).setValue(definition_value.getText().toString());
+                root_database.child(user.getEmail().substring(0, user.getEmail().indexOf("@"))).child("subjects").child(subject).child(definition.getText().toString()).setValue(definition_value.getText().toString());
                 Toast.makeText(Definitions.this, "added data", Toast.LENGTH_SHORT).show();
                 definitions.add(definition.getText().toString() + "|split|" + definition_value.getText().toString());
                 adapter.notifyDataSetChanged();
@@ -84,6 +86,7 @@ public class Definitions extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(Definitions.this,Quiz.class);
+                i.putExtra("subject",subject);
                 startActivity(i);
             }
         });
