@@ -51,6 +51,7 @@ public class Login extends AppCompatActivity {
                 }
                 if (password_string.length() < 6) {
                     password.setError("Password must be atleast 6 charecters");
+                    return;
                 }
                 progressBar.setVisibility(View.VISIBLE);
                 fbauth.signInWithEmailAndPassword(email_string, password_string).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -58,13 +59,13 @@ public class Login extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             Toast.makeText(Login.this, "success", Toast.LENGTH_SHORT).show();
+                            Intent i = new Intent(Login.this,Subjects.class);
+                            startActivity(i);
                         } else {
                             Toast.makeText(Login.this, "Error: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
-                Intent i = new Intent(Login.this,Subjects.class);
-                startActivity(i);
             }
         });
         register.setOnClickListener(new View.OnClickListener(){

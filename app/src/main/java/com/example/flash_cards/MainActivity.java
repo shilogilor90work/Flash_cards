@@ -62,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 if(password_string.length() < 6){
                     password.setError("Password must be atleast 6 characters");
+                    return;
                 }
                 progressBar.setVisibility(View.VISIBLE);
                 fbauth.createUserWithEmailAndPassword(email_string, password_string).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
