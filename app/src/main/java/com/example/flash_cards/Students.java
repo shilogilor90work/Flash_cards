@@ -28,10 +28,8 @@ import java.util.regex.Pattern;
 
 public class Students extends AppCompatActivity {
     ListView students_list;
-    EditText search_words;
-    Button btn_search;
     ArrayList<String> students;
-    MyAdapter adapter;
+    StudentsAdapter adapter;
     FirebaseAuth firebaseAuth;
     DatabaseReference root_database;
     FirebaseUser user;
@@ -41,12 +39,14 @@ public class Students extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_students);
+
         students_list = (ListView) findViewById(R.id.students_list);
         firebaseAuth = FirebaseAuth.getInstance();
         students = new ArrayList<String>();
         root_database = FirebaseDatabase.getInstance().getReference().child("users");
         user = FirebaseAuth.getInstance().getCurrentUser();
         subject=getIntent().getStringExtra("subject");
+        setTitle("Students : " + subject);
 
         root_database.child(user.getEmail().substring(0, user.getEmail().indexOf("@"))).child("subjects").child(subject).child("students").addListenerForSingleValueEvent(
                 new ValueEventListener() {
@@ -61,7 +61,7 @@ public class Students extends AppCompatActivity {
                     public void onCancelled(@NonNull DatabaseError error) {
                     }
                 });
-        adapter = new MyAdapter(this, students);
+        adapter = new StudentsAdapter(this, students);
     }
 
 }

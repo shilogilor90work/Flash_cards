@@ -27,86 +27,43 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class TeachersStudents extends AppCompatActivity {
-    ListView friends_list;
+    ListView students_list;
     EditText search_words;
     Button btn_search;
-    ArrayList<String> friends;
+    ArrayList<String> students;
     MyAdapter adapter;
     FirebaseAuth firebaseAuth;
     DatabaseReference root_database;
     FirebaseUser user;
+    String subject;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_teachers_students);
-        friends_list = (ListView) findViewById(R.id.students_list);
+        students_list = (ListView) findViewById(R.id.students_list);
         firebaseAuth = FirebaseAuth.getInstance();
         search_words = (EditText) findViewById(R.id.students_search);
         btn_search = (Button) findViewById(R.id.students_btn);
-        friends = new ArrayList<String>();
+        students = new ArrayList<String>();
         root_database = FirebaseDatabase.getInstance().getReference().child("users");
         user = FirebaseAuth.getInstance().getCurrentUser();
-        on_btn_click();
+        subject=getIntent().getStringExtra("subject");
 
-        root_database.child(user.getEmail().substring(0, user.getEmail().indexOf("@"))).child("friends").addListenerForSingleValueEvent(
+        root_database.child(user.getEmail().substring(0, user.getEmail().indexOf("@"))).child("subjects").child(subject).child("students").addListenerForSingleValueEvent(
                 new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         // Result will be holded Here
                         for (DataSnapshot dsp : dataSnapshot.getChildren()) {
-                            friends.add(String.valueOf(dsp.getValue()));
+                            students.add(dsp.getKey() + "|split|" + dsp.getValue().toString()+ "|*subject*|" + subject);
                         }
-                        friends_list.setAdapter(adapter);
+                        students_list.setAdapter(adapter);
                     }
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
                     }
                 });
-        adapter = new MyAdapter(this, friends);
-    }
-    /**
-     * method is used for checking valid email id format.
-     *
-     * @param email
-     * @return boolean true for valid false for invalid
-     */
-    public boolean isEmailValid(String email) {
-        String expression = "^[\\w\\.-]+@([\\w\\-]+\\.)+[A-Z]{2,4}$";
-        Pattern pattern = Pattern.compile(expression, Pattern.CASE_INSENSITIVE);
-        Matcher matcher = pattern.matcher(email);
-        return matcher.matches();
-    }
-    void checkEmailExistsOrNot(){
-        firebaseAuth.fetchSignInMethodsForEmail(search_words.getText().toString()).addOnCompleteListener(new OnCompleteListener<SignInMethodQueryResult>() {
-            @Override
-            public void onComplete(@NonNull Task<SignInMethodQueryResult> task) {
-                if (task.getResult().getSignInMethods().size() == 0){
-                    Toast.makeText(TeachersStudents.this, "That User does not exists", Toast.LENGTH_SHORT).show();
-                }else {
-                    root_database.child(user.getEmail().substring(0 ,user.getEmail().indexOf("@"))).child("friends").push().setValue(search_words.getText().toString());
-                    friends.add(search_words.getText().toString());
-                    adapter.notifyDataSetChanged();
-                    Toast.makeText(TeachersStudents.this, "Added to database", Toast.LENGTH_SHORT).show();
-                }
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                e.printStackTrace();
-            }
-        });
-    }
-    public void on_btn_click() {
-        btn_search.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (isEmailValid(search_words.getText().toString())) {
-                    checkEmailExistsOrNot();
-                } else {
-                    Toast.makeText(TeachersStudents.this, "Please type an email", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
+        adapter = new MyAdapter(this, students);
     }
 }

@@ -26,7 +26,6 @@ import java.util.ArrayList;
 public class StudentsAdapter extends ArrayAdapter {
     DatabaseReference root_database;
     FirebaseUser user;
-    String subject;
     public StudentsAdapter(Context context, ArrayList<String> records) {
         super(context, 0, records);
     }
@@ -42,8 +41,7 @@ public class StudentsAdapter extends ArrayAdapter {
         TextView list_txt = (TextView) convertView.findViewById(R.id.students_list_txt);
         TextView score = (TextView) convertView.findViewById(R.id.Score_List_txt);
         String key = item.substring(0,item.indexOf("|split|"));
-        String value = item.substring(item.indexOf("|split|") + 7 , item.indexOf("|*subject*|"));
-        subject= item.substring(item.indexOf("|*subject*|") + 11);
+        String value = item.substring(item.indexOf("|split|") + 7 );
         list_txt.setText(key);
         score.setText(value);
         return convertView;
