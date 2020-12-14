@@ -50,7 +50,7 @@ public class TeacherSubjects extends AppCompatActivity {
         add_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                root_database.child(user.getEmail().substring(0, user.getEmail().indexOf("@"))).child("subjects").child(subjects_txt.getText().toString()).setValue("stam");
+                root_database.child(user.getEmail().substring(0, user.getEmail().indexOf("@"))).child("subjects").child(subjects_txt.getText().toString()).child("teacher").setValue(user.getEmail());
                 Toast.makeText(TeacherSubjects.this, "added data", Toast.LENGTH_SHORT).show();
                 subjectArrayList.add(subjects_txt.getText().toString());
                 adapter.notifyDataSetChanged();

@@ -56,7 +56,7 @@ public class Definitions extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (definition.getText().toString().length() > 0 ) {
-                    root_database.child(user.getEmail().substring(0, user.getEmail().indexOf("@"))).child("subjects").child(subject).child(definition.getText().toString()).setValue(definition_value.getText().toString());
+                    root_database.child(user.getEmail().substring(0, user.getEmail().indexOf("@"))).child("subjects").child(subject).child("definitions").child(definition.getText().toString()).setValue(definition_value.getText().toString());
                     Toast.makeText(Definitions.this, "added data", Toast.LENGTH_SHORT).show();
                     definitions.add(definition.getText().toString() + "|split|" + definition_value.getText().toString()+ "|*subject*|" + subject);
                     adapter.notifyDataSetChanged();
@@ -65,7 +65,7 @@ public class Definitions extends AppCompatActivity {
                 }
             }
         });
-        root_database.child(user.getEmail().substring(0, user.getEmail().indexOf("@"))).child("subjects").child(subject).addListenerForSingleValueEvent(
+        root_database.child(user.getEmail().substring(0, user.getEmail().indexOf("@"))).child("subjects").child(subject).child("definitions").addListenerForSingleValueEvent(
                 new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {

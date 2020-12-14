@@ -40,7 +40,6 @@ public class TeacherDefinitions extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.teacher_activity_definitions);
-        Log.d("hithere", "test");
         setTitle("Definitions");
         add_btn = (Button) findViewById(R.id.teacher_add_btn);
 //        test = findViewById(R.id.teacher_Test2);
@@ -52,12 +51,11 @@ public class TeacherDefinitions extends AppCompatActivity {
         root_database = FirebaseDatabase.getInstance().getReference().child("users");
         user = FirebaseAuth.getInstance().getCurrentUser();
         subject=getIntent().getStringExtra("subject");
-        Log.d("hithere", definition.getText().toString());
         add_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (definition.getText().toString().length() > 0 ) {
-                    root_database.child(user.getEmail().substring(0, user.getEmail().indexOf("@"))).child("subjects").child(subject).child(definition.getText().toString()).setValue(definition_value.getText().toString());
+                    root_database.child(user.getEmail().substring(0, user.getEmail().indexOf("@"))).child("subjects").child(subject).child("definitions").child(definition.getText().toString()).setValue(definition_value.getText().toString());
                     Toast.makeText(TeacherDefinitions.this, "added data", Toast.LENGTH_SHORT).show();
                     definitions.add(definition.getText().toString() + "|split|" + definition_value.getText().toString()+ "|*subject*|" + subject);
                     adapter.notifyDataSetChanged();
@@ -66,7 +64,7 @@ public class TeacherDefinitions extends AppCompatActivity {
                 }
             }
         });
-        root_database.child(user.getEmail().substring(0, user.getEmail().indexOf("@"))).child("subjects").child(subject).addListenerForSingleValueEvent(
+        root_database.child(user.getEmail().substring(0, user.getEmail().indexOf("@"))).child("subjects").child(subject).child("definitions").addListenerForSingleValueEvent(
                 new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {

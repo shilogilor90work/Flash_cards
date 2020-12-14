@@ -65,8 +65,19 @@ public class MyAdapter extends ArrayAdapter {
         list_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                moveRecord(root_database.child( user.getEmail().substring(0, user.getEmail().indexOf("@"))).child("subjects"),root_database.child(list_txt.getText().toString().substring(0, list_txt.getText().toString().indexOf("@"))).child("subjects"));
-                list_txt.setText("Your DB was shared with: " + list_txt.getText().toString());
+                root_database.child(user.getEmail().substring(0, user.getEmail().indexOf("@"))).child("subjects").addListenerForSingleValueEvent(
+                        new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                for (DataSnapshot dsp : dataSnapshot.getChildren()) {
+                                    moveRecord(root_database.child( user.getEmail().substring(0, user.getEmail().indexOf("@"))).child("subjects").child(dsp.getKey().toString()),root_database.child(list_txt.getText().toString().substring(0, list_txt.getText().toString().indexOf("@"))).child("subjects").child(dsp.getKey().toString()));
+                                }
+                                list_txt.setText("Your DB was shared with: " + list_txt.getText().toString());
+                            }
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+                            }
+                        });
                 list_btn.setVisibility(View.GONE);
             }
         });

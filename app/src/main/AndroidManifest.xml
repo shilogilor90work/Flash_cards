@@ -18,6 +18,7 @@
         <activity android:name=".TeacherSubjects"/>
         <activity android:name=".Students"/>
         <activity android:name=".TeacherDefinitions"/>
+        <activity android:name=".TeachersStudents"/>
 
         <activity android:name=".NotEnoughDefinitions"/>
         <activity android:name=".MainActivity">

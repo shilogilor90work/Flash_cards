@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -64,7 +65,7 @@ public class Quiz extends AppCompatActivity {
         quit = (Button)findViewById(R.id.quit);
         subject=getIntent().getStringExtra("subject");
 
-        root_database.child(user.getEmail().substring(0, user.getEmail().indexOf("@"))).child("subjects").child(subject).addValueEventListener(new ValueEventListener(){
+        root_database.child(user.getEmail().substring(0, user.getEmail().indexOf("@"))).child("subjects").child(subject).child("definitions").addValueEventListener(new ValueEventListener(){
                @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 allQuestionsAndAnswers.clear();
@@ -191,6 +192,19 @@ public class Quiz extends AppCompatActivity {
     }
 
     private void goToFinish() {
+        root_database.child(user.getEmail().substring(0, user.getEmail().indexOf("@"))).child("subjects").child(subject).child("score").setValue(score);
+        root_database.child(user.getEmail().substring(0, user.getEmail().indexOf("@"))).child("subjects").child(subject).child("teacher").addListenerForSingleValueEvent(
+                new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        if (dataSnapshot.getValue() != null) {
+                            root_database.child(dataSnapshot.getValue().toString().substring(0, dataSnapshot.getValue().toString().indexOf("@"))).child("subjects").child(subject).child("students").child(user.getEmail().substring(0, user.getEmail().indexOf("@"))).setValue(score + "/" + allQuestionsAndAnswers.size());
+                        }
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                    }
+                });
         questionIndex=0;
         Intent i = new Intent(getApplicationContext(),FinalScore.class);
         i.putExtra("int_final_score",score);
