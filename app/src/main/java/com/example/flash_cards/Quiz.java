@@ -192,7 +192,7 @@ public class Quiz extends AppCompatActivity {
     }
 
     private void goToFinish() {
-        root_database.child(user.getEmail().substring(0, user.getEmail().indexOf("@"))).child("subjects").child(subject).child("score").setValue(score);
+        root_database.child(user.getEmail().substring(0, user.getEmail().indexOf("@"))).child("subjects").child(subject).child("score").setValue(score + "/" + allQuestionsAndAnswers.size());
         root_database.child(user.getEmail().substring(0, user.getEmail().indexOf("@"))).child("subjects").child(subject).child("teacher").addListenerForSingleValueEvent(
                 new ValueEventListener() {
                     @Override
