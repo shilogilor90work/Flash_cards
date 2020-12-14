@@ -67,20 +67,20 @@ public class Login extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             Toast.makeText(Login.this, "success", Toast.LENGTH_SHORT).show();
-                            Intent i = new Intent(Login.this,Subjects.class);
                             root_database = FirebaseDatabase.getInstance().getReference().child("users");
                             root_database.child(email_string.substring(0, email_string.indexOf("@"))).child("role").addListenerForSingleValueEvent(
                                     new ValueEventListener() {
                                         @Override
                                         public void onDataChange(DataSnapshot dataSnapshot) {
-                                            Log.d("hithere", "there");
                                             Toast.makeText(Login.this, dataSnapshot.getValue().toString(), Toast.LENGTH_SHORT).show();
                                             if (dataSnapshot.getValue().toString().equals("teacher")) {
-                                                i.putExtra("role", "teacher");
+                                                Intent i = new Intent(Login.this,TeacherSubjects.class);
+//                                                i.putExtra("role", "teacher");
                                                 startActivity(i);
 
                                             } else {
-                                                i.putExtra("role", "student");
+                                                Intent i = new Intent(Login.this,Subjects.class);
+//                                                i.putExtra("role", "student");
                                                 startActivity(i);
                                             }
                                         }
