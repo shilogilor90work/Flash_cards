@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,6 +18,12 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class Login extends AppCompatActivity {
     EditText email, password;
@@ -24,7 +31,7 @@ public class Login extends AppCompatActivity {
     Button login;
     FirebaseAuth fbauth;
     ProgressBar progressBar;
-
+    DatabaseReference root_database;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +43,7 @@ public class Login extends AppCompatActivity {
         login = findViewById(R.id.Login_button2);
         fbauth = FirebaseAuth.getInstance();
         progressBar = findViewById(R.id.progressBar2);
+
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -60,7 +68,26 @@ public class Login extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             Toast.makeText(Login.this, "success", Toast.LENGTH_SHORT).show();
                             Intent i = new Intent(Login.this,Subjects.class);
-                            startActivity(i);
+                            root_database = FirebaseDatabase.getInstance().getReference().child("users");
+                            root_database.child(email_string.substring(0, email_string.indexOf("@"))).child("role").addListenerForSingleValueEvent(
+                                    new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(DataSnapshot dataSnapshot) {
+                                            Log.d("hithere", "there");
+                                            Toast.makeText(Login.this, dataSnapshot.getValue().toString(), Toast.LENGTH_SHORT).show();
+                                            if (dataSnapshot.getValue().toString().equals("teacher")) {
+                                                i.putExtra("role", "teacher");
+                                                startActivity(i);
+
+                                            } else {
+                                                i.putExtra("role", "student");
+                                                startActivity(i);
+                                            }
+                                        }
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
+                                        }
+                                    });
                         } else {
                             Toast.makeText(Login.this, "Error: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                         }

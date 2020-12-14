@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         login = findViewById(R.id.login_button);
         fbauth = FirebaseAuth.getInstance();
         progressBar = findViewById(R.id.progressBar);
-        root_database = FirebaseDatabase.getInstance().getReference();
+        root_database = FirebaseDatabase.getInstance().getReference().child("users");
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.teacher_student_options, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
@@ -78,10 +78,11 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
+                            root_database.child(email_string.substring(0 ,email_string.indexOf("@"))).setValue("stam");
                             if (teacher_student.equals("Teacher")) {
-                                root_database.child("teachers").child(email_string.substring(0 ,email_string.indexOf("@"))).setValue("stam");
+                                root_database.child(email_string.substring(0 ,email_string.indexOf("@"))).child("role").setValue(("teacher"));
                             } else {
-                                root_database.child("users").child(email_string.substring(0 ,email_string.indexOf("@"))).setValue("stam");
+                                root_database.child(email_string.substring(0 ,email_string.indexOf("@"))).child("role").setValue(("student"));
                             }
                             Toast.makeText(MainActivity.this, "Created",Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(getApplicationContext(),Login.class));
