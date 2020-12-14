@@ -2,13 +2,14 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/teacher_subject"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Subjects">
 
 
     <Button
-        android:id="@+id/subjects_btn"
+        android:id="@+id/teacher_subjects_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -19,19 +20,19 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/subjects"
+        android:id="@+id/teacher_subjects"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:ems="10"
         android:inputType="textPersonName"
-        app:layout_constraintEnd_toStartOf="@+id/subjects_btn"
+        app:layout_constraintEnd_toStartOf="@+id/teacher_subjects_btn"
         app:layout_constraintHorizontal_bias="0.38"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/go_to_friends"
+        android:id="@+id/teacher_go_to_friends"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -39,10 +40,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.939"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/subjects_btn" />
+        app:layout_constraintTop_toBottomOf="@+id/teacher_subjects_btn" />
 
     <ListView
-        android:id="@+id/subject_list"
+        android:id="@+id/teacher_subject_list"
         android:layout_width="389dp"
         android:layout_height="746dp"
         android:layout_marginStart="8dp"
@@ -54,6 +55,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-    </ListView>
+        app:layout_constraintTop_toTopOf="parent"></ListView>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -7,9 +7,12 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,19 +23,21 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     EditText full_name, email, password;
     Button register;
     TextView login;
     FirebaseAuth fbauth;
     ProgressBar progressBar;
     DatabaseReference root_database;
+    Spinner spinner;
+    String teacher_student;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setTitle("Register");
-
+        spinner = findViewById(R.id.teacher_student);
         full_name = findViewById(R.id.full_name);
         email = findViewById(R.id.email);
         password = findViewById(R.id.password_user);
@@ -41,6 +46,10 @@ public class MainActivity extends AppCompatActivity {
         fbauth = FirebaseAuth.getInstance();
         progressBar = findViewById(R.id.progressBar);
         root_database = FirebaseDatabase.getInstance().getReference().child("users");
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.teacher_student_options, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+        spinner.setOnItemSelectedListener(this);
         register.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -70,6 +79,11 @@ public class MainActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
                             root_database.child(email_string.substring(0 ,email_string.indexOf("@"))).setValue("stam");
+                            if (teacher_student.equals("Teacher")) {
+                                root_database.child(email_string.substring(0 ,email_string.indexOf("@"))).child("role").setValue(("teacher"));
+                            } else {
+                                root_database.child(email_string.substring(0 ,email_string.indexOf("@"))).child("role").setValue(("student"));
+                            }
                             Toast.makeText(MainActivity.this, "Created",Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(getApplicationContext(),Login.class));
                         } else {
@@ -85,5 +99,15 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(),Login.class));
             }
         });
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        teacher_student = parent.getItemAtPosition(position).toString();
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
     }
 }
