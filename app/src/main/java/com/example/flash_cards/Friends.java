@@ -2,8 +2,11 @@ package com.example.flash_cards;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,6 +16,7 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.SignInMethodQueryResult;
@@ -40,6 +44,30 @@ public class Friends extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_friends);
+
+        BottomNavigationView bnv = findViewById(R.id.BottomNavigationView);
+        bnv.setSelectedItemId(R.id.Subjects_item);
+
+        bnv.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener(){
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item){
+                Fragment selectedFragment = null;
+                switch (item.getItemId()){
+                    case R.id.Friends_item:
+                        return true;
+
+                    case R.id.Subjects_item:
+                        startActivity(new Intent(getApplicationContext(),Subjects.class));
+                        overridePendingTransition(0,0);
+                        return true;
+
+                    case R.id.Contact_item:
+                        return true;
+                }
+                return false;
+            }
+        });
+
         friends_list = (ListView) findViewById(R.id.friends_list);
         firebaseAuth = FirebaseAuth.getInstance();
         search_words = (EditText) findViewById(R.id.friends_search);
