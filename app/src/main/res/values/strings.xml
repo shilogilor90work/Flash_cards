@@ -9,6 +9,8 @@
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="close">Close</string>
+    <string name="open">Open</string>
     <string-array name="teacher_student_options">
         <item>Teacher</item>
         <item>Student</item>

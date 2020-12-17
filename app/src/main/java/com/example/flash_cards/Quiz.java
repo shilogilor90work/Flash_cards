@@ -1,15 +1,17 @@
 package com.example.flash_cards;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
-
+import androidx.appcompat.widget.Toolbar;
+import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -26,7 +28,6 @@ import java.util.Map;
 import java.util.Random;
 
 public class Quiz extends AppCompatActivity {
-    FirebaseAuth firebaseAuth;
     DatabaseReference root_database;
     FirebaseUser user;
 
@@ -46,13 +47,27 @@ public class Quiz extends AppCompatActivity {
     Button quit;
     String subject;
 
+    DrawerLayout drawerLayout;
+    Toolbar toolbar;
+    NavigationView navigationView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz);
         setTitle("Quiz");
 
-        firebaseAuth = FirebaseAuth.getInstance();
+
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
+        toolbar = (Toolbar) findViewById(R.id.toolbar_id);
+
+        setSupportActionBar(toolbar);
+        ActionBarDrawerToggle toggle= new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.open,R.string.close);
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
+
+
         root_database = FirebaseDatabase.getInstance().getReference().child("users");
         user = FirebaseAuth.getInstance().getCurrentUser();
         rand=new Random();
@@ -132,6 +147,7 @@ public class Quiz extends AppCompatActivity {
             }
         });
     }
+
 
     private void updateQuestion(int i){
         if (i<allQuestionsAndAnswers.size()) {
