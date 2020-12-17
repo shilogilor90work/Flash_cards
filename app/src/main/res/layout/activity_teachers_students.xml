@@ -14,6 +14,8 @@
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:text="Add Student"
+        android:textColor="@color/black"
+        app:backgroundTint="#32CD32"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

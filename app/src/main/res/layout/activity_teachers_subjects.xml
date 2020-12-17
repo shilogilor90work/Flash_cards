@@ -16,6 +16,8 @@
         android:layout_marginEnd="24dp"
         android:layout_marginRight="24dp"
         android:text="Add Subject"
+        android:textColor="@color/black"
+        app:backgroundTint="#32CD32"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -37,6 +39,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="Go to Friends"
+        android:textColor="@color/black"
+        app:backgroundTint="@android:color/holo_orange_light"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.939"
         app:layout_constraintStart_toStartOf="parent"

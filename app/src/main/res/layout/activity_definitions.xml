@@ -58,6 +58,8 @@
         android:layout_marginEnd="4dp"
         android:layout_marginRight="4dp"
         android:text="Test yourself"
+        android:textColor="@color/black"
+        app:backgroundTint="@android:color/holo_orange_light"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -69,6 +71,8 @@
         android:layout_marginEnd="304dp"
         android:layout_marginRight="304dp"
         android:text="Add"
+        android:textColor="@color/black"
+        app:backgroundTint="#32CD32"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
