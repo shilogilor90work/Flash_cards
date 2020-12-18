@@ -36,7 +36,7 @@ public class Login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        setTitle("Login");
+        setTitle("Flash Cards");
         email = findViewById(R.id.email2);
         password = findViewById(R.id.password_user2);
         register = findViewById(R.id.register_link);

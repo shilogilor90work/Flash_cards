@@ -26,7 +26,6 @@ import java.util.ArrayList;
 
 public class Subjects extends AppCompatActivity {
 
-    Button definition_btn;
     Button add_btn;
     EditText subjects_txt;
     ListView subject_list;
@@ -97,6 +96,5 @@ public class Subjects extends AppCompatActivity {
                     }
                 });
         adapter = new SubjectsAdapter(this, subjectArrayList);
-
     }
 }

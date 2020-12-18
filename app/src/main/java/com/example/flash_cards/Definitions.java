@@ -43,8 +43,7 @@ public class Definitions extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_definitions);
-        setTitle("Definitions");
-
+        setTitle("Flash Cards");
         BottomNavigationView bnv = findViewById(R.id.BottomNavigationView);
         bnv.setSelectedItemId(R.id.Subjects_item);
 

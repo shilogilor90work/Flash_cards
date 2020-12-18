@@ -11,6 +11,7 @@
         android:layout_width="138dp"
         android:layout_height="64dp"
         android:layout_weight="1"
+        android:paddingLeft="15dp"
         tools:text="Definition" />
 
     <TextView
@@ -23,12 +24,11 @@
 
     <Button
         android:id="@+id/definition_delete"
-        android:layout_width="96dp"
-        android:layout_height="54dp"
+        android:layout_width="45dp"
+        android:layout_height="63dp"
         android:layout_weight="1"
-        android:text="Delete"
-        android:textColor="@color/black"
-        app:backgroundTint="@android:color/holo_red_light"
+        android:drawableLeft="@drawable/garbage"
+        app:backgroundTint="#FDF8C4"
         tools:layout_editor_absoluteX="316dp"
         tools:layout_editor_absoluteY="0dp" />
 </LinearLayout>
