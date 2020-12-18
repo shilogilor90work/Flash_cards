@@ -40,7 +40,7 @@ public class Definitions extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_definitions);
-        setTitle("Definitions");
+        setTitle("Flash Cards");
         add_btn = (Button) findViewById(R.id.add_btn);
         test = findViewById(R.id.Test2);
         definition = (EditText) findViewById(R.id.definition);

@@ -5,33 +5,26 @@
     android:id="@+id/Definition_value"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FDF8C4"
     tools:context=".Definitions">
 
     <EditText
         android:id="@+id/definition_value"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="Put answer here"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="217dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="75dp"
+        android:hint="Answer"
+        android:paddingLeft="75dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.774"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.067"
-        tools:text="Put Here Value" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ListView
         android:id="@+id/definition_list"
         android:layout_width="389dp"
         android:layout_height="746dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="600dp"
-        android:layout_marginEnd="14dp"
-        android:layout_marginRight="14dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="250dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -39,41 +32,52 @@
 
     <EditText
         android:id="@+id/definition"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="Put  question here"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="217dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="30dp"
+        android:hint="Question"
+        android:paddingLeft="70dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.054"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.068"
-        tools:text="Put Here Definition" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/Test2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="104dp"
-        android:layout_marginEnd="4dp"
-        android:layout_marginRight="4dp"
-        android:text="Test yourself"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_weight="1"
+        android:drawableLeft="@drawable/test_icon"
         android:textColor="@color/black"
         app:backgroundTint="@android:color/holo_orange_light"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/add_btn"
+    <TextView
+        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="104dp"
-        android:layout_marginEnd="304dp"
-        android:layout_marginRight="304dp"
-        android:text="Add"
-        android:textColor="@color/black"
-        app:backgroundTint="#32CD32"
+        android:layout_marginTop="15dp"
+        android:text="My Cards"
+        android:textColor="@color/purple_700"
+        android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/add_btn" />
+
+    <Button
+        android:id="@+id/add_btn"
+        android:layout_width="111dp"
+        android:layout_height="41dp"
+        android:layout_marginTop="125dp"
+        android:text="New Card"
+        android:textColor="@color/black"
+        app:backgroundTint="#F084C6F8"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
