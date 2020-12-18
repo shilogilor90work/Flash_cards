@@ -58,6 +58,8 @@ public class Subjects extends AppCompatActivity {
                         return true;
 
                     case R.id.Contact_item:
+                        startActivity(new Intent(getApplicationContext(),Contact.class));
+                        overridePendingTransition(0,0);
                         return true;
                 }
                 return false;
