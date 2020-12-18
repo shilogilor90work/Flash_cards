@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        setTitle("Register");
+        setTitle("Flash Cards");
         spinner = findViewById(R.id.teacher_student);
         full_name = findViewById(R.id.full_name);
         email = findViewById(R.id.email);
