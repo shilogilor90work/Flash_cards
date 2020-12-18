@@ -2,6 +2,7 @@ package com.example.flash_cards;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -10,7 +11,9 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -24,7 +27,6 @@ import java.util.ArrayList;
 public class TeacherSubjects extends AppCompatActivity {
 
     Button add_btn;
-    Button friends_btn;
     EditText subjects_txt;
     ListView subject_list;
     FirebaseAuth firebaseAuth;
@@ -39,7 +41,31 @@ public class TeacherSubjects extends AppCompatActivity {
         setContentView(R.layout.activity_teachers_subjects);
         setTitle("Subjects");
 
-        friends_btn = (Button) findViewById(R.id.teacher_go_to_friends);
+        BottomNavigationView bnv = findViewById(R.id.BottomNavigationView);
+        bnv.setSelectedItemId(R.id.Subjects_item);
+
+        bnv.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener(){
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item){
+                Fragment selectedFragment = null;
+                switch (item.getItemId()){
+                    case R.id.Subjects_item:
+                        return true;
+
+                    case R.id.Friends_item:
+                        startActivity(new Intent(getApplicationContext(),TeachersStudents.class));
+                        overridePendingTransition(0,0);
+                        return true;
+
+                    case R.id.Contact_item:
+                        startActivity(new Intent(getApplicationContext(),Contact.class));
+                        overridePendingTransition(0,0);
+                        return true;
+                }
+                return false;
+            }
+        });
+
         add_btn = (Button) findViewById(R.id.teacher_subjects_btn);
         subjects_txt = (EditText) findViewById(R.id.teacher_subjects);
         subject_list = (ListView) findViewById(R.id.teacher_subject_list);
@@ -71,12 +97,5 @@ public class TeacherSubjects extends AppCompatActivity {
                 });
         adapter = new TeacherSubjectsAdapter(this, subjectArrayList);
 
-        friends_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(TeacherSubjects.this,Friends.class);
-                startActivity(i);
-            }
-        });
     }
 }
