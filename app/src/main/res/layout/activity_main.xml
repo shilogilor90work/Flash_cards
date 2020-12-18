@@ -4,15 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/soft_blue_lines"><![CDATA[
+    android:background="@drawable/soft_blue_lines"
     tools:context=".MainActivity">
-
-
-
-
-
-
-    ]]>
 
     <TextView
         android:id="@+id/auth_text"

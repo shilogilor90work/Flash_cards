@@ -5,19 +5,27 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Subjects"
+    android:background="@drawable/soft_blue_lines"
     android:id="@+id/subject_page">
 
 
     <Button
         android:id="@+id/subjects_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginRight="24dp"
-        android:text="Add Subject"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="126dp"
+        android:layout_marginEnd="35dp"
+        android:layout_marginRight="35dp"
+        android:background="#FFFFFF"
+        android:insetLeft="0dp"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:text="+"
         android:textColor="@color/black"
-        app:backgroundTint="#32CD32"
+        android:textSize="30sp"
+        app:backgroundTint="@android:color/holo_orange_light"
+        app:elevation="0dp"
+        app:iconPadding="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -25,26 +33,18 @@
         android:id="@+id/subjects"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="70dp"
+        android:layout_marginLeft="70dp"
+        android:layout_marginTop="130dp"
         android:ems="10"
+        android:hint="New Subject"
         android:inputType="textPersonName"
-        app:layout_constraintEnd_toStartOf="@+id/subjects_btn"
-        app:layout_constraintHorizontal_bias="0.38"
+        android:textColor="#100F0F"
+        android:textColorHighlight="#3F51B5"
+        android:textColorHint="#100F0F"
+        android:textColorLink="#3F51B5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/go_to_friends"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Go to Friends"
-        android:textColor="@color/black"
-        app:backgroundTint="@android:color/holo_orange_dark"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.939"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/subjects_btn" />
 
     <ListView
         android:id="@+id/subject_list"
@@ -66,12 +66,26 @@
         android:id="@+id/BottomNavigationView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@android:color/holo_blue_light"
+        android:layout_alignParentBottom="true"
+        android:background="#F084C6F8"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/bottom_menu"
-        android:layout_alignParentBottom="true"/>
+        app:menu="@menu/bottom_menu" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Subjects"
+        android:textColor="@color/purple_700"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.433"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.085" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
