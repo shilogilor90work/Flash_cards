@@ -40,6 +40,7 @@ public class DefinitionsAdapter extends ArrayAdapter {
         subject= item.substring(item.indexOf("|*subject*|") + 11);
         definitions_text.setText(key);
         definition_value_text.setText(value);
+
         definition_delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

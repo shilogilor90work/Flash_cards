@@ -28,7 +28,6 @@ public class Subjects extends AppCompatActivity {
 
     Button definition_btn;
     Button add_btn;
-    Button friends_btn;
     EditText subjects_txt;
     ListView subject_list;
     FirebaseAuth firebaseAuth;
@@ -60,13 +59,14 @@ public class Subjects extends AppCompatActivity {
                         return true;
 
                     case R.id.Contact_item:
+                        startActivity(new Intent(getApplicationContext(),Contact.class));
+                        overridePendingTransition(0,0);
                         return true;
                 }
                 return false;
             }
         });
 
-        friends_btn = (Button) findViewById(R.id.go_to_friends);
         add_btn = (Button) findViewById(R.id.subjects_btn);
         subjects_txt = (EditText) findViewById(R.id.subjects);
         subject_list = (ListView) findViewById(R.id.subject_list);
@@ -98,12 +98,5 @@ public class Subjects extends AppCompatActivity {
                 });
         adapter = new SubjectsAdapter(this, subjectArrayList);
 
-        friends_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(Subjects.this,Friends.class);
-                startActivity(i);
-            }
-        });
     }
 }

@@ -2,16 +2,19 @@ package com.example.flash_cards;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -41,6 +44,34 @@ public class Definitions extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_definitions);
         setTitle("Definitions");
+
+        BottomNavigationView bnv = findViewById(R.id.BottomNavigationView);
+        bnv.setSelectedItemId(R.id.Subjects_item);
+
+        bnv.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener(){
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item){
+                Fragment selectedFragment = null;
+                switch (item.getItemId()){
+                    case R.id.Friends_item:
+                        startActivity(new Intent(getApplicationContext(),Friends.class));
+                        overridePendingTransition(0,0);
+                        return true;
+
+                    case R.id.Subjects_item:
+                        startActivity(new Intent(getApplicationContext(),Subjects.class));
+                        overridePendingTransition(0,0);
+                        return true;
+
+                    case R.id.Contact_item:
+                        startActivity(new Intent(getApplicationContext(),Contact.class));
+                        overridePendingTransition(0,0);
+                        return true;
+                }
+                return false;
+            }
+        });
+
         add_btn = (Button) findViewById(R.id.add_btn);
         test = findViewById(R.id.Test2);
         definition = (EditText) findViewById(R.id.definition);
