@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -58,7 +59,9 @@ public class Subjects extends AppCompatActivity {
                         return true;
 
                     case R.id.Contact_item:
-                        startActivity(new Intent(getApplicationContext(),Contact.class));
+                        Intent i = new Intent(getApplicationContext(),Contact.class);
+                        i.putExtra("role", "student");
+                        startActivity(i);
                         overridePendingTransition(0,0);
                         return true;
                 }

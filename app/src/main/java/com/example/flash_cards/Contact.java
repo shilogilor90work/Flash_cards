@@ -3,6 +3,7 @@ package com.example.flash_cards;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -18,31 +19,42 @@ public class Contact extends AppCompatActivity {
 
     EditText etTo,etSubject,etMessage;
     Button btSend;
+    String role;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contact);
         setTitle("Contact");
-
+        role = getIntent().getStringExtra("role");
         BottomNavigationView bnv = findViewById(R.id.BottomNavigationView);
         bnv.setSelectedItemId(R.id.Subjects_item);
-
+        Log.d("hithere", role);
         bnv.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener(){
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item){
                 Fragment selectedFragment = null;
                 switch (item.getItemId()){
                     case R.id.Friends_item:
-                        startActivity(new Intent(getApplicationContext(),Friends.class));
-                        overridePendingTransition(0,0);
-                        return true;
-
+                        if (role.equals("student")) {
+                            startActivity(new Intent(getApplicationContext(),Friends.class));
+                            overridePendingTransition(0,0);
+                            return true;
+                        } else {
+                            startActivity(new Intent(getApplicationContext(),TeachersStudents.class));
+                            overridePendingTransition(0,0);
+                            return true;
+                        }
                     case R.id.Subjects_item:
-                        startActivity(new Intent(getApplicationContext(),Subjects.class));
-                        overridePendingTransition(0,0);
-                        return true;
-
+                        if (role.equals("student")) {
+                            startActivity(new Intent(getApplicationContext(),Subjects.class));
+                            overridePendingTransition(0,0);
+                            return true;
+                        } else {
+                            startActivity(new Intent(getApplicationContext(),TeacherSubjects.class));
+                            overridePendingTransition(0,0);
+                            return true;
+                        }
                     case R.id.Contact_item:
                         return true;
                 }

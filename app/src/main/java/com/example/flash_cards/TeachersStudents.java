@@ -63,7 +63,9 @@ public class TeachersStudents extends AppCompatActivity {
                         return true;
 
                     case R.id.Contact_item:
-                        startActivity(new Intent(getApplicationContext(),Contact.class));
+                        Intent i = new Intent(getApplicationContext(),Contact.class);
+                        i.putExtra("role", "teacher");
+                        startActivity(i);
                         overridePendingTransition(0,0);
                         return true;
                 }
@@ -72,22 +74,22 @@ public class TeachersStudents extends AppCompatActivity {
         });
 
 
-        students_list = (ListView) findViewById(R.id.students_list);
+        students_list = (ListView) findViewById(R.id.studnets_list);
         firebaseAuth = FirebaseAuth.getInstance();
         search_words = (EditText) findViewById(R.id.students_search);
         btn_search = (Button) findViewById(R.id.students_btn);
         students = new ArrayList<String>();
         root_database = FirebaseDatabase.getInstance().getReference().child("users");
         user = FirebaseAuth.getInstance().getCurrentUser();
-        subject=getIntent().getStringExtra("subject");
+        adapter = new MyAdapter(this, students);
 
-        root_database.child(user.getEmail().substring(0, user.getEmail().indexOf("@"))).child("subjects").child(subject).child("students").addListenerForSingleValueEvent(
+        root_database.child(user.getEmail().substring(0, user.getEmail().indexOf("@"))).child("friends").addListenerForSingleValueEvent(
                 new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         // Result will be holded Here
                         for (DataSnapshot dsp : dataSnapshot.getChildren()) {
-                            students.add(dsp.getKey() + "|split|" + dsp.getValue().toString()+ "|*subject*|" + subject);
+                            students.add(String.valueOf(dsp.getValue()));
                         }
                         students_list.setAdapter(adapter);
                     }
@@ -95,6 +97,5 @@ public class TeachersStudents extends AppCompatActivity {
                     public void onCancelled(@NonNull DatabaseError error) {
                     }
                 });
-        adapter = new MyAdapter(this, students);
     }
 }
