@@ -44,7 +44,7 @@ public class DefinitionsAdapter extends ArrayAdapter {
         definition_delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DatabaseReference db_node = root_database.child( user.getEmail().substring(0, user.getEmail().indexOf("@"))).child("subjects").child(subject).child(key);
+                DatabaseReference db_node = root_database.child( user.getEmail().substring(0, user.getEmail().indexOf("@"))).child("subjects").child(subject).child("definitions").child(key);
                 db_node.removeValue();
                 records.remove(position);
                 notifyDataSetChanged();
