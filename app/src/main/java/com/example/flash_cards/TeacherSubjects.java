@@ -58,7 +58,9 @@ public class TeacherSubjects extends AppCompatActivity {
                         return true;
 
                     case R.id.Contact_item:
-                        startActivity(new Intent(getApplicationContext(),Contact.class));
+                        Intent i = new Intent(getApplicationContext(),Contact.class);
+                        i.putExtra("role", "teacher");
+                        startActivity(i);
                         overridePendingTransition(0,0);
                         return true;
                 }
