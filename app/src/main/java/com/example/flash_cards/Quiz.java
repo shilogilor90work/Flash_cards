@@ -36,6 +36,7 @@ public class Quiz extends AppCompatActivity {
 
     private int score = 0;
     private int questionIndex = 0;
+    int amountOfQuestions = 0;
     private Random rand;
     TextView scoreView;
     TextView questionView;
@@ -51,7 +52,7 @@ public class Quiz extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz);
-        setTitle("Quiz");
+        setTitle("Flash Cards");
 
         root_database = FirebaseDatabase.getInstance().getReference().child("users");
         user = FirebaseAuth.getInstance().getCurrentUser();
@@ -80,10 +81,13 @@ public class Quiz extends AppCompatActivity {
                 if(i<3){
                     goToNotEnoughDefinitions();
                 }
+                amountOfQuestions = i;
                 List<Map.Entry<Integer, ArrayList<String>>> QaA2 = new ArrayList<Map.Entry<Integer, ArrayList<String>>>(allQuestionsAndAnswers.entrySet());
                 updateQuestion(questionIndex);
                 questionIndex++;
-            }
+                scoreView.setText(questionIndex + "/" + amountOfQuestions);
+
+               }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
             }
@@ -94,10 +98,11 @@ public class Quiz extends AppCompatActivity {
             public void onClick(View v) {
                 if(correctAnswer.equals(choice1.getText())){
                     score++;
-                    updateScore(score);
+//                    updateScore(score);
                 }
                 updateQuestion(questionIndex);
                 questionIndex++;
+                scoreView.setText(questionIndex + "/" + amountOfQuestions);
             }
         });
 
@@ -106,10 +111,11 @@ public class Quiz extends AppCompatActivity {
             public void onClick(View v) {
                 if(correctAnswer.equals(choice2.getText())){
                     score++;
-                    updateScore(score);
+//                    updateScore(score);
                 }
                 updateQuestion(questionIndex);
                 questionIndex++;
+                scoreView.setText(questionIndex + "/" + amountOfQuestions);
             }
         });
 
@@ -118,10 +124,11 @@ public class Quiz extends AppCompatActivity {
             public void onClick(View v) {
                 if(correctAnswer.equals(choice3.getText())){
                     score++;
-                    updateScore(score);
+//                    updateScore(score);
                 }
                 updateQuestion(questionIndex);
                 questionIndex++;
+                scoreView.setText(questionIndex + "/" + amountOfQuestions);
             }
         });
 

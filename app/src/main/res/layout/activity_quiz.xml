@@ -9,6 +9,7 @@
     android:paddingTop="16dp"
     android:paddingRight="16dp"
     android:paddingBottom="16dp"
+    android:background="#FDF8C4"
     tools:context=".Quiz">
 
     <RelativeLayout
@@ -21,31 +22,27 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/score_text"
+        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_marginStart="4dp"
-        android:layout_marginLeft="4dp"
-        android:layout_marginTop="16dp"
-        android:text="Score"
-        android:textSize="20sp"
+        android:layout_marginTop="15dp"
+        android:text="Quiz"
+        android:textColor="@color/purple_700"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/add_btn" />
 
     <TextView
         android:id="@+id/score"
-        android:layout_width="15dp"
-        android:layout_height="29dp"
+        android:layout_width="61dp"
+        android:layout_height="41dp"
         android:layout_alignParentRight="true"
-        android:layout_marginStart="312dp"
-        android:layout_marginLeft="312dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="5dp"
         android:text="0"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/score_text"
         app:layout_constraintTop_toTopOf="parent" />
 
 
@@ -54,7 +51,10 @@
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:layout_marginTop="76dp"
+        android:gravity="center"
         android:padding="8dp"
+        android:textColor="#000000"
+        android:textColorHint="#000000"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -103,19 +103,19 @@
 
     <Button
         android:id="@+id/quit"
-        android:layout_width="377dp"
+        android:layout_width="120dp"
         android:layout_height="50dp"
         android:layout_marginTop="92dp"
-        app:backgroundTint="@android:color/holo_red_dark"
         android:padding="8dp"
         android:text="quit"
         android:textColor="#fff"
+        app:backgroundTint="@android:color/holo_red_dark"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.40"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/choice3"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="1.0" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
