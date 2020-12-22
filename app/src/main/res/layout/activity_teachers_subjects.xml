@@ -4,20 +4,27 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/teacher_subject"
     android:layout_width="match_parent"
+    android:background="@drawable/soft_blue_lines"
     android:layout_height="match_parent"
     tools:context=".Subjects">
 
 
     <Button
         android:id="@+id/teacher_subjects_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginRight="24dp"
-        android:text="Add Subject"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="126dp"
+        android:layout_marginEnd="35dp"
+        android:layout_marginRight="35dp"
+        android:background="#FFFFFF"
+        android:insetLeft="0dp"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:text="+"
         android:textColor="@color/black"
-        app:backgroundTint="#32CD32"
+        android:textSize="30sp"
+        app:backgroundTint="@android:color/holo_orange_light"
+        app:iconPadding="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -25,11 +32,16 @@
         android:id="@+id/teacher_subjects"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="70dp"
+        android:layout_marginLeft="70dp"
+        android:layout_marginTop="130dp"
         android:ems="10"
+        android:hint="New Subject"
         android:inputType="textPersonName"
-        app:layout_constraintEnd_toStartOf="@+id/teacher_subjects_btn"
-        app:layout_constraintHorizontal_bias="0.38"
+        android:textColor="#100F0F"
+        android:textColorHighlight="#3F51B5"
+        android:textColorHint="#100F0F"
+        android:textColorLink="#3F51B5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -39,10 +51,9 @@
         android:layout_height="746dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="600dp"
+        android:layout_marginTop="230dp"
         android:layout_marginEnd="14dp"
         android:layout_marginRight="14dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -58,5 +69,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/bottom_menu"
         android:layout_alignParentBottom="true"/>
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Subjects"
+        android:textColor="@color/purple_700"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.433"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.085" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

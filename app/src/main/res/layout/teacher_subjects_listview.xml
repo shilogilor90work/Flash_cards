@@ -8,44 +8,45 @@
     <TextView
         android:id="@+id/teacher_subjects_text"
         android:layout_width="100dp"
-        android:layout_height="40dp"
+        android:layout_height="70dp"
         android:layout_weight="1"
-
+        android:paddingLeft="55dp"
+        android:textColor="#000000"
+        android:textColorHighlight="#000000"
+        android:textColorHint="#000000"
+        android:textColorLink="#000000"
+        android:textSize="18sp"
         tools:text="subjects" />
 
     <Button
         android:id="@+id/teacher_subject_delete"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
         android:layout_weight="1"
-        android:text="Delete"
-
-        android:textColor="@color/black"
-        android:textSize="14sp"
-        app:backgroundTint="@android:color/holo_red_light"
+        android:drawableLeft="@drawable/garbage"
+        app:backgroundTint="#FFFFFF"
         tools:layout_editor_absoluteX="316dp"
         tools:layout_editor_absoluteY="0dp" />
 
     <Button
         android:id="@+id/teacher_move_to_students"
-        android:layout_width="wrap_content"
+        android:layout_width="38dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:text="Students"
-
         android:textColor="@color/black"
-        android:textSize="14sp"
-        app:backgroundTint="@android:color/holo_orange_light"
-        tools:layout_editor_absoluteX="316dp"
-        tools:layout_editor_absoluteY="0dp" />
+        android:textSize="10sp"
+        app:backgroundTint="#F084C6F8"
+        app:iconPadding="0dp" />
 
     <Button
         android:id="@+id/teacher_btn_definitions"
-        android:layout_width="wrap_content"
+        android:layout_width="38dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-
-        android:text="Definitions"
+        android:text="My Cards"
         android:textColor="@color/black"
-        app:backgroundTint="@color/teal_200" />
+        android:textSize="10sp"
+        app:backgroundTint="#F084C6F8"
+        app:iconPadding="0dp" />
 </LinearLayout>
