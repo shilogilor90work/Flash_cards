@@ -51,15 +51,13 @@
         android:layout_height="746dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="600dp"
+        android:layout_marginTop="230dp"
         android:layout_marginEnd="14dp"
         android:layout_marginRight="14dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-    </ListView>
+        app:layout_constraintTop_toTopOf="parent"></ListView>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/BottomNavigationView"

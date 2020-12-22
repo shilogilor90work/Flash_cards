@@ -45,7 +45,6 @@ public class TeachersStudents extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_teachers_students);
-
         BottomNavigationView bnv = findViewById(R.id.BottomNavigationView);
         bnv.setSelectedItemId(R.id.Subjects_item);
 
@@ -97,5 +96,51 @@ public class TeachersStudents extends AppCompatActivity {
                     public void onCancelled(@NonNull DatabaseError error) {
                     }
                 });
+        on_btn_click();
+
+    }
+    /**
+     * method is used for checking valid email id format.
+     *
+     * @param email
+     * @return boolean true for valid false for invalid
+     */
+    public boolean isEmailValid(String email) {
+        String expression = "^[\\w\\.-]+@([\\w\\-]+\\.)+[A-Z]{2,4}$";
+        Pattern pattern = Pattern.compile(expression, Pattern.CASE_INSENSITIVE);
+        Matcher matcher = pattern.matcher(email);
+        return matcher.matches();
+    }
+    void checkEmailExistsOrNot(){
+        firebaseAuth.fetchSignInMethodsForEmail(search_words.getText().toString()).addOnCompleteListener(new OnCompleteListener<SignInMethodQueryResult>() {
+            @Override
+            public void onComplete(@NonNull Task<SignInMethodQueryResult> task) {
+                if (task.getResult().getSignInMethods().size() == 0){
+                    Toast.makeText(TeachersStudents.this, "That User does not exists", Toast.LENGTH_SHORT).show();
+                }else {
+                    root_database.child(user.getEmail().substring(0 ,user.getEmail().indexOf("@"))).child("friends").push().setValue(search_words.getText().toString());
+                    students.add(search_words.getText().toString());
+                    adapter.notifyDataSetChanged();
+                    Toast.makeText(TeachersStudents.this, "Added to database", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                e.printStackTrace();
+            }
+        });
+    }
+    public void on_btn_click() {
+        btn_search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (isEmailValid(search_words.getText().toString())) {
+                    checkEmailExistsOrNot();
+                } else {
+                    Toast.makeText(TeachersStudents.this, "Please type an email", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 }
