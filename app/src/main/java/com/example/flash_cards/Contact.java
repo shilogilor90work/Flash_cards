@@ -33,7 +33,6 @@ public class Contact extends AppCompatActivity {
         bnv.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener(){
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item){
-                Fragment selectedFragment = null;
                 switch (item.getItemId()){
                     case R.id.Friends_item:
                         if (role.equals("student")) {
