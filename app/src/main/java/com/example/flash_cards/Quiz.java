@@ -7,6 +7,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -80,13 +81,14 @@ public class Quiz extends AppCompatActivity {
                 }
                 if(i<3){
                     goToNotEnoughDefinitions();
+                    return;
                 }
+
                 amountOfQuestions = i;
                 List<Map.Entry<Integer, ArrayList<String>>> QaA2 = new ArrayList<Map.Entry<Integer, ArrayList<String>>>(allQuestionsAndAnswers.entrySet());
+                scoreView.setText(score + "/" + amountOfQuestions);
                 updateQuestion(questionIndex);
                 questionIndex++;
-                scoreView.setText(questionIndex + "/" + amountOfQuestions);
-
                }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
@@ -98,11 +100,10 @@ public class Quiz extends AppCompatActivity {
             public void onClick(View v) {
                 if(correctAnswer.equals(choice1.getText())){
                     score++;
-//                    updateScore(score);
                 }
                 updateQuestion(questionIndex);
+                scoreView.setText(score + "/" + amountOfQuestions);
                 questionIndex++;
-                scoreView.setText(questionIndex + "/" + amountOfQuestions);
             }
         });
 
@@ -111,11 +112,10 @@ public class Quiz extends AppCompatActivity {
             public void onClick(View v) {
                 if(correctAnswer.equals(choice2.getText())){
                     score++;
-//                    updateScore(score);
                 }
                 updateQuestion(questionIndex);
+                scoreView.setText(score + "/" + amountOfQuestions);
                 questionIndex++;
-                scoreView.setText(questionIndex + "/" + amountOfQuestions);
             }
         });
 
@@ -124,11 +124,10 @@ public class Quiz extends AppCompatActivity {
             public void onClick(View v) {
                 if(correctAnswer.equals(choice3.getText())){
                     score++;
-//                    updateScore(score);
                 }
                 updateQuestion(questionIndex);
+                scoreView.setText(score + "/" + amountOfQuestions);
                 questionIndex++;
-                scoreView.setText(questionIndex + "/" + amountOfQuestions);
             }
         });
 
@@ -193,10 +192,6 @@ public class Quiz extends AppCompatActivity {
                 choice3.setText(ca);
                 break;
         }
-    }
-
-    private void updateScore(int s){
-        scoreView.setText(""+s);
     }
 
     private void goToFinish() {

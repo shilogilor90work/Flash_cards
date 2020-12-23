@@ -20,24 +20,34 @@ public class NotEnoughDefinitions extends AppCompatActivity {
         setContentView(R.layout.activity_not_enough_definitions);
         setTitle("Sorry for the inconvenience");
 
+        String role = getIntent().getStringExtra("role");
         BottomNavigationView bnv = findViewById(R.id.BottomNavigationView);
         bnv.setSelectedItemId(R.id.Subjects_item);
 
         bnv.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener(){
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item){
-                Fragment selectedFragment = null;
                 switch (item.getItemId()){
                     case R.id.Friends_item:
-                        startActivity(new Intent(getApplicationContext(),Friends.class));
-                        overridePendingTransition(0,0);
-                        return true;
-
+                        if (role.equals("student")) {
+                            startActivity(new Intent(getApplicationContext(),Friends.class));
+                            overridePendingTransition(0,0);
+                            return true;
+                        } else {
+                            startActivity(new Intent(getApplicationContext(),TeachersStudents.class));
+                            overridePendingTransition(0,0);
+                            return true;
+                        }
                     case R.id.Subjects_item:
-                        startActivity(new Intent(getApplicationContext(),Subjects.class));
-                        overridePendingTransition(0,0);
-                        return true;
-
+                        if (role.equals("student")) {
+                            startActivity(new Intent(getApplicationContext(),Subjects.class));
+                            overridePendingTransition(0,0);
+                            return true;
+                        } else {
+                            startActivity(new Intent(getApplicationContext(),TeacherSubjects.class));
+                            overridePendingTransition(0,0);
+                            return true;
+                        }
                     case R.id.Contact_item:
                         Intent i = new Intent(getApplicationContext(),TeachersStudents.class);
                         i.putExtra("role", "student");
