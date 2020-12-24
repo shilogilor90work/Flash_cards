@@ -75,12 +75,12 @@ public class Login extends AppCompatActivity {
                                             Toast.makeText(Login.this, dataSnapshot.getValue().toString(), Toast.LENGTH_SHORT).show();
                                             if (dataSnapshot.getValue().toString().equals("teacher")) {
                                                 Intent i = new Intent(Login.this,TeacherSubjects.class);
-//                                                i.putExtra("role", "teacher");
+                                                i.putExtra("role", "teacher");
                                                 startActivity(i);
 
                                             } else {
                                                 Intent i = new Intent(Login.this,Subjects.class);
-//                                                i.putExtra("role", "student");
+                                                i.putExtra("role", "student");
                                                 startActivity(i);
                                             }
                                         }
