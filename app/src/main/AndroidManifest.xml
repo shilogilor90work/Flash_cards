@@ -9,30 +9,26 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Flash_cards">
-        <activity android:name="Friends" />
+        <activity android:name=".SendNotif"></activity>
+        <activity android:name=".Friends" />
         <activity android:name=".Definitions" />
-        <activity android:name=".Subjects" >
-
-        </activity>
+        <activity android:name=".Subjects" />
         <activity android:name=".Quiz" />
-        <activity android:name=".Login" >
-
+        <activity android:name=".Login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".FinalScore"/>
-        <activity android:name=".TeacherSubjects"/>
-        <activity android:name=".Students"/>
-        <activity android:name=".TeacherDefinitions"/>
-        <activity android:name=".TeachersStudents"/>
-        <activity android:name=".Contact"/>
-        <activity android:name=".NotEnoughDefinitions"/>
-        <activity android:name=".MainActivity">
-        </activity>
+        <activity android:name=".FinalScore" />
+        <activity android:name=".TeacherSubjects" />
+        <activity android:name=".Students" />
+        <activity android:name=".TeacherDefinitions" />
+        <activity android:name=".TeachersStudents" />
+        <activity android:name=".Contact" />
+        <activity android:name=".NotEnoughDefinitions" />
+        <activity android:name=".MainActivity" />
     </application>
 
 </manifest>

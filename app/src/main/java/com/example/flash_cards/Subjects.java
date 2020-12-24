@@ -27,6 +27,13 @@ import java.util.ArrayList;
 
 public class Subjects extends AppCompatActivity {
 
+
+
+    //each change i had insert is marked in comment by the end
+    Button test_sample;//
+
+
+
     Button add_btn;
     EditText subjects_txt;
     ListView subject_list;
@@ -68,7 +75,7 @@ public class Subjects extends AppCompatActivity {
                 return false;
             }
         });
-
+        test_sample=(Button) findViewById(R.id.test_sample);
         add_btn = (Button) findViewById(R.id.subjects_btn);
         subjects_txt = (EditText) findViewById(R.id.subjects);
         subject_list = (ListView) findViewById(R.id.subject_list);
@@ -83,6 +90,14 @@ public class Subjects extends AppCompatActivity {
                 Toast.makeText(Subjects.this, "added data", Toast.LENGTH_SHORT).show();
                 subjectArrayList.add(subjects_txt.getText().toString());
                 adapter.notifyDataSetChanged();
+            }
+        });
+
+        test_sample.setOnClickListener(new View.OnClickListener() {//this is an additional change meant for testing which later needs to be erased
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(Subjects.this,SendNotif.class));
+
             }
         });
         root_database.child(user.getEmail().substring(0, user.getEmail().indexOf("@"))).child("subjects").addListenerForSingleValueEvent(
