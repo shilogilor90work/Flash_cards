@@ -1,7 +1,7 @@
 package com.example.flash_cards.notificationsPack;
 
 
-//each user hold a unique token id
+//each user holds a unique token id
 public class Token {
     private String token;
 

@@ -79,6 +79,8 @@ public class MyAdapter extends ArrayAdapter {
                             }
                         });
                 list_btn.setVisibility(View.GONE);
+
+
             }
         });
         return convertView;
