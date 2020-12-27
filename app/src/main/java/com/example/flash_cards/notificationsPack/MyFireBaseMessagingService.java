@@ -16,13 +16,13 @@ public class MyFireBaseMessagingService extends FirebaseMessagingService
     @Override
     public void onMessageReceived(@NonNull RemoteMessage remoteMessage) {
         super.onMessageReceived(remoteMessage);
-        title=remoteMessage.getData().get("Title");
+        //title=remoteMessage.getData().get("Title");
         message=remoteMessage.getData().get("Message");
 
         NotificationCompat.Builder builder =
                 new NotificationCompat.Builder(getApplicationContext())
                         .setSmallIcon(R.drawable.ic_android_black_24dp)
-                        .setContentTitle(title)
+                        //.setContentTitle(title)
                         .setContentText(message);
         NotificationManager manager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
         manager.notify(0, builder.build());

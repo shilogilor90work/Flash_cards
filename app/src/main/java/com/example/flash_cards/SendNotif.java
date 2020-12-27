@@ -22,6 +22,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.messaging.FirebaseMessaging;
+import com.google.firebase.messaging.FirebaseMessagingService;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -41,10 +43,10 @@ public class SendNotif extends AppCompatActivity {
         Title=findViewById(R.id.Title);
         Message=findViewById(R.id.Message);
         send=findViewById(R.id.button);
-        apiService = Client.getClient("https://fcm.googleapis.com/").create(APIService.class);
-        send.setOnClickListener(new View.OnClickListener() {
+        //apiService = Client.getClient("https://fcm.googleapis.com/").create(APIService.class);
+       /* send.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {//////
+            public void onClick(View v) {////// not necessary
                 FirebaseDatabase.getInstance().getReference().child("Tokens").child(UserTB.getText().toString().trim()).child("token").addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -58,7 +60,7 @@ public class SendNotif extends AppCompatActivity {
                     }
                 });
             }
-        });
+        });*/
         UpdateToken();
     }
     private void UpdateToken(){
@@ -66,9 +68,11 @@ public class SendNotif extends AppCompatActivity {
         String refreshToken= FirebaseInstanceId.getInstance().getToken();
         Token token= new Token(refreshToken);
         FirebaseDatabase.getInstance().getReference("Tokens").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(token);
+
     }
 
-    public void sendNotifications(String usertoken, String title, String message) {
+
+    /*public void sendNotifications(String usertoken, String title, String message) {
         Data data = new Data(title, message);
         NotificationSender sender = new NotificationSender(data, usertoken);
         apiService.sendNotification(sender).enqueue(new Callback<MyResponse>() {
@@ -86,7 +90,7 @@ public class SendNotif extends AppCompatActivity {
 
             }
         });
-    }
+    }*/
 
 }
 

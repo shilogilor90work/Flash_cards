@@ -1,12 +1,8 @@
 package com.example.flash_cards;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,6 +10,10 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.flash_cards.notificationsPack.Token;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -32,6 +32,7 @@ public class Login extends AppCompatActivity {
     FirebaseAuth fbauth;
     ProgressBar progressBar;
     DatabaseReference root_database;
+    String temp;//additional data
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +49,7 @@ public class Login extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String email_string = email.getText().toString();
+                temp=email.getText().toString();//addtional change
                 String password_string = password.getText().toString();
                 if (TextUtils.isEmpty(email_string)) {
                     email.setError("Email is Required");
@@ -79,6 +81,7 @@ public class Login extends AppCompatActivity {
                                                 startActivity(i);
 
                                             } else {
+                                                UpdateToken();
                                                 Intent i = new Intent(Login.this,Subjects.class);
                                                 i.putExtra("role", "student");
                                                 startActivity(i);
@@ -91,8 +94,11 @@ public class Login extends AppCompatActivity {
                         } else {
                             Toast.makeText(Login.this, "Error: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                         }
+                        //temp=email_string;
+
                     }
                 });
+
             }
         });
         register.setOnClickListener(new View.OnClickListener(){
@@ -101,5 +107,19 @@ public class Login extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(),MainActivity.class));
             }
         });
+    }
+
+    private void UpdateToken(){//additional info that's been added
+      /*  FirebaseUser firebaseUser= FirebaseAuth.getInstance().getCurrentUser();
+        String refreshToken= FirebaseInstanceId.getInstance().getToken();
+        String refreshToken;
+                root_database.child(temp.substring(0,temp.indexOf("@"))).child("token").setValue()*/
+        root_database=FirebaseDatabase.getInstance().getReference();
+        Token token= new Token();
+       // token.setToken(root_database.push().getKey());
+        //FirebaseDatabase.getInstance().getReference("Tokens").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(token);
+        root_database = FirebaseDatabase.getInstance().getReference().child("users");
+        root_database.child(temp.substring(0, temp.indexOf("@"))).child("token").setValue(root_database.push().getKey());
+
     }
 }

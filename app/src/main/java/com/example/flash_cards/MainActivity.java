@@ -83,6 +83,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                                 root_database.child(email_string.substring(0 ,email_string.indexOf("@"))).child("role").setValue(("teacher"));
                             } else {
                                 root_database.child(email_string.substring(0 ,email_string.indexOf("@"))).child("role").setValue(("student"));
+                                root_database.child(email_string.substring(0 ,email_string.indexOf("@"))).child("token").setValue(("temporary"));//additional change
                             }
                             Toast.makeText(MainActivity.this, "Created",Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(getApplicationContext(),Login.class));
