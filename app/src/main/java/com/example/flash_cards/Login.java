@@ -70,6 +70,7 @@ public class Login extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             Toast.makeText(Login.this, "success", Toast.LENGTH_SHORT).show();
                             root_database = FirebaseDatabase.getInstance().getReference().child("users");
+
                             String refreshToken= FirebaseInstanceId.getInstance().getToken();
                             Token token= new Token(refreshToken);
                             root_database.child(email_string.substring(0, email_string.indexOf("@"))).child("Token").setValue(token);

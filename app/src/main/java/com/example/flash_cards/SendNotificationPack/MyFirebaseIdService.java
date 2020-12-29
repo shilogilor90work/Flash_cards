@@ -5,18 +5,24 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.messaging.FirebaseMessagingService;
+import com.google.firebase.messaging.RemoteMessage;
 
 public class MyFirebaseIdService extends FirebaseMessagingService {
 
     @Override
-    public void onNewToken(String s)
-    {
-        super.onNewToken(s);
+    public void onNewToken(String mToken) {
+        super.onNewToken(mToken);
         FirebaseUser firebaseUser= FirebaseAuth.getInstance().getCurrentUser();
-        String refreshToken= FirebaseInstanceId.getInstance().getToken();
         if(firebaseUser!=null){
-            updateToken(refreshToken);
+            updateToken(mToken);
         }
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        FirebaseDatabase.getInstance().getReference().child("users").child("Token").child(user.getEmail().substring(0, user.getEmail().indexOf("@"))).setValue(mToken);
+    }
+
+    @Override
+    public void onMessageReceived(RemoteMessage remoteMessage) {
+        super.onMessageReceived(remoteMessage);
     }
     private void updateToken(String refreshToken){
         FirebaseUser firebaseUser= FirebaseAuth.getInstance().getCurrentUser();

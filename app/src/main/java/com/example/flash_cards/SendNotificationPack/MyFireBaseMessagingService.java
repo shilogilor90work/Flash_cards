@@ -24,7 +24,7 @@ public class MyFireBaseMessagingService extends FirebaseMessagingService {
                         .setContentTitle(title)
                         .setContentText(message);
         NotificationManager manager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
-        manager.notify(0, builder.build());
+        manager.notify(20, builder.build());
     }
 
 }
