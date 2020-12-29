@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
@@ -20,12 +21,16 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
+import com.example.flash_cards.SendNotificationPack.*;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import java.util.ArrayList;
 
 public class MyAdapter extends ArrayAdapter {
     DatabaseReference root_database;
     FirebaseUser user;
+    private APIService apiService;
     public MyAdapter(Context context, ArrayList<String> records) {
         super(context, 0, records);
     }
@@ -53,6 +58,7 @@ public class MyAdapter extends ArrayAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+        apiService = Client.getClient("https://fcm.googleapis.com/").create(APIService.class);
         root_database = FirebaseDatabase.getInstance().getReference().child("users");
         user = FirebaseAuth.getInstance().getCurrentUser();
         String item = (String) getItem(position);
@@ -72,7 +78,23 @@ public class MyAdapter extends ArrayAdapter {
                                 for (DataSnapshot dsp : dataSnapshot.getChildren()) {
                                     moveRecord(root_database.child( user.getEmail().substring(0, user.getEmail().indexOf("@"))).child("subjects").child(dsp.getKey().toString()),root_database.child(list_txt.getText().toString().substring(0, list_txt.getText().toString().indexOf("@"))).child("subjects").child(dsp.getKey().toString()));
                                 }
-                                list_txt.setText("Your DB was shared with: " + list_txt.getText().toString());
+                                list_txt.setText("Your DB was shared with: " + item);
+                                Log.d("here", "here");
+                                root_database.child(item.substring(0, item.indexOf("@"))).child("Token").child("token").addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                        String usertoken=dataSnapshot.getValue(String.class);
+                                        Log.d("here", "test" + item.substring(0, item.indexOf("@")));
+                                        Log.d("here", "test" + usertoken);
+                                        sendNotifications(usertoken, "Update Detected: " , "Your Subjects Were Updated By: " + user.getEmail());
+                                        Log.d("here", "2");
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                    }
+                                });
                             }
                             @Override
                             public void onCancelled(@NonNull DatabaseError error) {
@@ -82,5 +104,29 @@ public class MyAdapter extends ArrayAdapter {
             }
         });
         return convertView;
+    }
+    public void sendNotifications(String usertoken, String title, String message) {
+        Data data = new Data(title, message);
+        NotificationSender sender = new NotificationSender(data, usertoken);
+        apiService.sendNotifcation(sender).enqueue(new Callback<MyResponse>() {
+            @Override
+            public void onResponse(Call<MyResponse> call, Response<MyResponse> response) {
+                Log.d("here", "start " + response.code());
+
+                if (response.code() == 200) {
+                    Log.d("here", "200" + sender.to);
+
+                    if (response.body().success != 1) {
+                        Log.d("here", "failed " + response.body());
+                        Toast.makeText(getContext(), "Failed ", Toast.LENGTH_LONG);
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<MyResponse> call, Throwable t) {
+
+            }
+        });
     }
 }
