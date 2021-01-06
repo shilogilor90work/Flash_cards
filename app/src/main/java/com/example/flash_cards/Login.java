@@ -14,6 +14,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.flash_cards.SendNotificationPack.Token;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -24,6 +25,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 public class Login extends AppCompatActivity {
     EditText email, password;
@@ -68,6 +70,10 @@ public class Login extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             Toast.makeText(Login.this, "success", Toast.LENGTH_SHORT).show();
                             root_database = FirebaseDatabase.getInstance().getReference().child("users");
+
+                            String refreshToken= FirebaseInstanceId.getInstance().getToken();
+                            Token token= new Token(refreshToken);
+                            root_database.child(email_string.substring(0, email_string.indexOf("@"))).child("Token").setValue(token);
                             root_database.child(email_string.substring(0, email_string.indexOf("@"))).child("role").addListenerForSingleValueEvent(
                                     new ValueEventListener() {
                                         @Override
